@@ -32,7 +32,7 @@ const products = [
 
 // Load a section file and fill it with its schema defaults and first preset, like the theme editor does
 function loadSection(name) {
-  const source = readFileSync(join(root, 'sections', `${name}.liquid`), 'utf8');
+  const source = readFileSync(join(root, 'theme', 'sections', `${name}.liquid`), 'utf8');
   const schema = JSON.parse(source.match(/{%\s*schema\s*%}([\s\S]*?){%\s*endschema\s*%}/)[1]);
   const template = source
     .replace(/{%\s*schema\s*%}[\s\S]*?{%\s*endschema\s*%}/, '')

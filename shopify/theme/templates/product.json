@@ -1,0 +1,347 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity_selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {}
+        },
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share"
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant_picker",
+        "quantity_selector",
+        "buy_buttons",
+        "description",
+        "share"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "large",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "stacked",
+        "mobile_thumbnails": "hide",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 12
+      }
+    },
+    "bp_usp_bar_PfcxLR": {
+      "type": "bp-usp-bar",
+      "blocks": {
+        "usp_7JQmdq": {
+          "type": "usp",
+          "settings": {
+            "icon": "truck",
+            "title": "Tracked shipping",
+            "text": "Follow your order from our warehouse to your door.",
+            "link": ""
+          }
+        },
+        "usp_Gx9Gqt": {
+          "type": "usp",
+          "settings": {
+            "icon": "return",
+            "title": "14-day returns",
+            "text": "Changed your mind? Send it back within 14 days.",
+            "link": ""
+          }
+        },
+        "usp_FGrAA7": {
+          "type": "usp",
+          "settings": {
+            "icon": "shield",
+            "title": "2-year warranty",
+            "text": "Built for many trips, and covered if it isn't.",
+            "link": ""
+          }
+        },
+        "usp_pJwUAC": {
+          "type": "usp",
+          "settings": {
+            "icon": "lock",
+            "title": "Secure checkout",
+            "text": "Pay safely with Shopify Checkout.",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "usp_7JQmdq",
+        "usp_Gx9Gqt",
+        "usp_FGrAA7",
+        "usp_pJwUAC"
+      ],
+      "name": "USP bar",
+      "settings": {
+        "background": "sand",
+        "show_heading": false,
+        "heading": "Why travel with Basepacker",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "bp_travel_specs_QKDL7D": {
+      "type": "bp-travel-specs",
+      "blocks": {
+        "airline_xJ6BdL": {
+          "type": "airline",
+          "settings": {
+            "airline": "Ryanair",
+            "bag_type": "Priority cabin bag",
+            "max_h": 55,
+            "max_w": 40,
+            "max_d": 20,
+            "max_kg": 10
+          }
+        },
+        "airline_qHnn9d": {
+          "type": "airline",
+          "settings": {
+            "airline": "Ryanair",
+            "bag_type": "Free under-seat bag",
+            "max_h": 40,
+            "max_w": 30,
+            "max_d": 20,
+            "max_kg": 0
+          }
+        },
+        "airline_mghgYF": {
+          "type": "airline",
+          "settings": {
+            "airline": "easyJet",
+            "bag_type": "Large cabin bag",
+            "max_h": 56,
+            "max_w": 45,
+            "max_d": 25,
+            "max_kg": 15
+          }
+        },
+        "airline_nwHQE7": {
+          "type": "airline",
+          "settings": {
+            "airline": "KLM",
+            "bag_type": "Cabin bag",
+            "max_h": 55,
+            "max_w": 35,
+            "max_d": 25,
+            "max_kg": 12
+          }
+        },
+        "airline_NpWjqU": {
+          "type": "airline",
+          "settings": {
+            "airline": "British Airways",
+            "bag_type": "Cabin bag",
+            "max_h": 56,
+            "max_w": 45,
+            "max_d": 25,
+            "max_kg": 23
+          }
+        },
+        "airline_LGKKbg": {
+          "type": "airline",
+          "settings": {
+            "airline": "Lufthansa",
+            "bag_type": "Cabin bag",
+            "max_h": 55,
+            "max_w": 40,
+            "max_d": 23,
+            "max_kg": 8
+          }
+        }
+      },
+      "block_order": [
+        "airline_xJ6BdL",
+        "airline_qHnn9d",
+        "airline_mghgYF",
+        "airline_nwHQE7",
+        "airline_NpWjqU",
+        "airline_LGKKbg"
+      ],
+      "name": "Travel specs & fit",
+      "settings": {
+        "eyebrow": "Specs & fit",
+        "heading": "Will it fit in the cabin?",
+        "fit_heading": "Airline cabin check",
+        "show_unit_toggle": true,
+        "note": "Limits checked September 2026. Airlines change their rules, so confirm with your airline before you fly.",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "heading": "Toelichtingen",
+        "heading_size": "h2",
+        "open_by_default": false,
+        "color_scheme": "",
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading": "You may also like",
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "columns_mobile": "2",
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "padding_top": 36,
+        "padding_bottom": 28
+      }
+    },
+    "bp_faq_rFm9fH": {
+      "type": "bp-faq",
+      "blocks": {
+        "question_mMeA6J": {
+          "type": "question",
+          "settings": {
+            "question": "What are the exact dimensions?",
+            "answer": "<p>It measures [size] and weighs [weight] empty. The airline cabin check on this page shows which carriers accept it.</p>",
+            "product_types": ""
+          }
+        },
+        "question_MDdd3Y": {
+          "type": "question",
+          "settings": {
+            "question": "Will it fit as cabin baggage on every airline?",
+            "answer": "<p>Not on every airline, because cabin limits differ. At [size] it fits most major European carriers. Check the airline table on this page for your flight, and confirm with your airline before you fly.</p>",
+            "product_types": "Suitcase, Backpack"
+          }
+        },
+        "question_CyQFDc": {
+          "type": "question",
+          "settings": {
+            "question": "What is it made of?",
+            "answer": "<p>[material]. We name the exact material so you know what you're buying.</p>",
+            "product_types": ""
+          }
+        },
+        "question_3WrdCU": {
+          "type": "question",
+          "settings": {
+            "question": "Is it waterproof?",
+            "answer": "<p>It's water-repellent, not waterproof. It keeps out light rain and splashes, but don't submerge it or leave it out in heavy rain.</p>",
+            "product_types": "Backpack, Crossbody bag, Organizer"
+          }
+        },
+        "question_YFBeUL": {
+          "type": "question",
+          "settings": {
+            "question": "Is it easy to repack for every trip?",
+            "answer": "<p>Yes. Every pocket has a fixed job, so repacking follows the same routine each time and nothing gets left behind.</p>",
+            "product_types": "Organizer"
+          }
+        },
+        "question_xKPLLc": {
+          "type": "question",
+          "settings": {
+            "question": "Will it last more than one trip?",
+            "answer": "<p>It's built for repeated trips, not a single holiday. Every product comes with the 2-year legal warranty that applies in the EU.</p>",
+            "product_types": ""
+          }
+        },
+        "question_JnURrz": {
+          "type": "question",
+          "settings": {
+            "question": "Can I return it?",
+            "answer": "<p>Yes, within 14 days of delivery. Our returns policy explains how it works.</p>",
+            "product_types": ""
+          }
+        }
+      },
+      "block_order": [
+        "question_mMeA6J",
+        "question_MDdd3Y",
+        "question_CyQFDc",
+        "question_3WrdCU",
+        "question_YFBeUL",
+        "question_xKPLLc",
+        "question_JnURrz"
+      ],
+      "name": "Product FAQ",
+      "settings": {
+        "heading": "Questions before you pack?",
+        "intro": "Straight answers about size, materials and returns.",
+        "contact": "",
+        "open_first": true,
+        "one_open": true,
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "bp_usp_bar_PfcxLR",
+    "bp_travel_specs_QKDL7D",
+    "bp_faq_rFm9fH",
+    "disclosures",
+    "related-products"
+  ]
+}
