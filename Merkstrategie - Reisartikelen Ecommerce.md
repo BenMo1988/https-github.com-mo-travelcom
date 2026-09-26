@@ -6,7 +6,7 @@ Dit document legt het strategische fundament voor het nieuwe reismerk: een e-com
 
 > **Strategische update (21-09-2026):** het merk richt zich vanaf de start internationaal, niet alleen op Nederland/België. De webshop wordt volledig in het Engels opgezet (copy, productteksten, e-mails). Dit heeft gevolgen voor naamgeving, doelgroepdefinitie en tone-of-voice-voorbeelden — hieronder aangepast.
 >
-> **Werknaam vastgesteld: Voya.** Nog niet definitief — domein-/merkencheck volgt later — maar wordt vanaf nu gebruikt in alle voorbeelden en documentatie totdat een andere naam wordt gekozen.
+> **Werknaam bijgewerkt (26-09-2026): Basepacker.** Voya is losgelaten na domeincheck (domein + variaties allemaal bezet, plus merkenrisico door het bestaande bedrijf Voya Financial). Basepacker is de nieuwe werktitel — **basepacker.com is vrij** (bevestigd 26-09-2026). Merkencheck (BOIP/EUIPO/USPTO) moet nog gebeuren voordat de naam definitief is.
 >
 > **Platform: Shopify, thema Dawn.** Dawn (gratis Online Store 2.0-thema) dekt de sectiestructuur uit `Landingspagina Structuur.md` goed, maar sticky add-to-cart en het UGC-/reviews-blok vereisen apps (zie `Productpagina Elementen.md` voor details).
 

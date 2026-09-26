@@ -1,0 +1,438 @@
+<title>Gemini Handoff — Basepacker</title>
+<meta name="description" content="Kopieerbare projectoverdracht voor Basepacker, klaar om in Gemini te plakken.">
+<style>
+  :root{
+    --ink:#1D3B53;
+    --ink-soft:#3d5568;
+    --paper:#FAF8F4;
+    --paper-raised:#ffffff;
+    --sand:#E8DCC8;
+    --accent:#C97B4A;
+    --moss:#4F6357;
+    --line:#e2d9c8;
+    --text:#2B2B2B;
+    --text-dim:#5c5850;
+    --mono-bg:#f1ece1;
+  }
+  :root:not([data-theme="light"]){
+    @media (prefers-color-scheme: dark){
+      --ink:#cfe0ee;
+      --ink-soft:#a9c2d6;
+      --paper:#171b1f;
+      --paper-raised:#1f242a;
+      --sand:#2c2620;
+      --accent:#e2946a;
+      --moss:#7f9c8d;
+      --line:#33302a;
+      --text:#ece7dd;
+      --text-dim:#a49d8f;
+      --mono-bg:#20241f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ink:#cfe0ee;
+    --ink-soft:#a9c2d6;
+    --paper:#171b1f;
+    --paper-raised:#1f242a;
+    --sand:#2c2620;
+    --accent:#e2946a;
+    --moss:#7f9c8d;
+    --line:#33302a;
+    --text:#ece7dd;
+    --text-dim:#a49d8f;
+    --mono-bg:#20241f;
+  }
+
+  @font-face{ font-display: swap; }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    padding-block: 40px;
+  }
+  .wrap{
+    max-width: 880px;
+    margin: 0 auto;
+    padding-inline: 20px;
+  }
+  .eyebrow{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-size: 12.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--moss);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .eyebrow .dot{
+    width:7px;height:7px;border-radius:50%;
+    background: var(--accent);
+    flex: none;
+  }
+  h1{
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: clamp(28px, 4.5vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+  .sub{
+    font-size: 16px;
+    color: var(--text-dim);
+    max-width: 60ch;
+    line-height: 1.55;
+    margin: 0 0 28px;
+  }
+
+  .status-row{
+    display:flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+  }
+  .chip{
+    display:flex;
+    align-items:center;
+    gap: 7px;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 7px 14px 7px 10px;
+    font-size: 13px;
+    color: var(--text);
+  }
+  .chip b{ color: var(--ink); font-weight: 700; }
+  .chip.new{ border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+  .chip .tick{
+    width:16px;height:16px;border-radius:50%;
+    background: var(--moss);
+    color: var(--paper-raised);
+    display:grid; place-items:center;
+    font-size: 10px;
+    flex: none;
+  }
+  .chip.new .tick{ background: var(--accent); }
+
+  .toolbar{
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 5;
+    display:flex;
+    justify-content: flex-end;
+    margin-bottom: 18px;
+  }
+  #copyBtn{
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--paper-raised);
+    background: var(--ink);
+    border: none;
+    border-radius: 10px;
+    padding: 11px 18px;
+    cursor: pointer;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--ink) 60%, transparent);
+    transition: transform .12s ease, background .15s ease;
+  }
+  #copyBtn:hover{ background: var(--ink-soft); }
+  #copyBtn:active{ transform: scale(0.97); }
+  #copyBtn.copied{ background: var(--moss); }
+  #copyBtn svg{ width:15px; height:15px; flex:none; }
+
+  .panel{
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .panel-head{
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--sand) 55%, transparent), transparent);
+  }
+  .panel-head .label{
+    font-size: 11.5px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 700;
+  }
+
+  .doc{
+    padding: 6px 28px 32px;
+    font-size: 15px;
+    line-height: 1.68;
+  }
+  .doc h2{
+    font-family: 'Fraunces', Georgia, serif;
+    font-weight: 500;
+    font-size: 19px;
+    color: var(--ink);
+    margin: 30px 0 8px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .doc h2:first-of-type{ border-top: none; padding-top: 22px; }
+  .doc p{ margin: 0 0 12px; color: var(--text); }
+  .doc p.lead{ color: var(--text-dim); }
+  .doc ul, .doc ol{ margin: 6px 0 14px; padding-left: 22px; }
+  .doc li{ margin-bottom: 6px; }
+  .doc strong{ color: var(--ink); }
+  .doc code{
+    background: var(--mono-bg);
+    padding: 1px 6px;
+    border-radius: 5px;
+    font-size: 13.5px;
+    font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+  }
+  .free-tag{
+    display:inline-flex;
+    align-items:center;
+    gap:5px;
+    background: color-mix(in srgb, var(--moss) 16%, transparent);
+    color: var(--moss);
+    font-weight: 700;
+    font-size: 13px;
+    padding: 2px 10px;
+    border-radius: 999px;
+    margin-left: 4px;
+  }
+
+  .ask-box{
+    margin: 24px 28px 28px;
+    border: 1.5px dashed color-mix(in srgb, var(--accent) 55%, var(--line));
+    background: color-mix(in srgb, var(--accent) 7%, transparent);
+    border-radius: 12px;
+    padding: 16px 18px;
+  }
+  .ask-box .label{
+    font-size: 11.5px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+  .ask-box input{
+    width: 100%;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14.5px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--text);
+  }
+  .ask-box input:focus{ outline: 2px solid var(--accent); outline-offset: 1px; }
+  .ask-box .hint{ font-size: 12.5px; color: var(--text-dim); margin-top: 6px; }
+
+  footer{
+    margin-top: 22px;
+    font-size: 12.5px;
+    color: var(--text-dim);
+    text-align: center;
+  }
+
+  @media (max-width: 560px){
+    .doc{ padding: 6px 18px 26px; }
+    .panel-head{ padding: 16px 18px; }
+    .ask-box{ margin: 20px 18px 24px; }
+  }
+</style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;600&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+
+<div class="wrap">
+  <div class="eyebrow"><span class="dot"></span>Project handoff · Basepacker</div>
+  <h1>Overdracht naar Gemini</h1>
+  <p class="sub">Alles wat al vastligt voor het project, in één kopieerbaar blok. Plak dit als eerste bericht in Gemini, zodat het gesprek verdergaat waar dit is gebleven.</p>
+
+  <div class="status-row">
+    <div class="chip"><span class="tick">✓</span>Werktitel: <b>&nbsp;Basepacker</b></div>
+    <div class="chip new"><span class="tick">✓</span><b>basepacker.com vrij</b></div>
+    <div class="chip"><span class="tick">✓</span>Shopify <b>&nbsp;+ Dawn</b></div>
+    <div class="chip"><span class="tick">✓</span>Doelgroep &amp; 3 persona's</div>
+  </div>
+
+  <div class="toolbar">
+    <button id="copyBtn" onclick="copyPrompt()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+      <span id="copyLabel">Kopieer volledige prompt</span>
+    </button>
+  </div>
+
+  <div class="panel">
+    <div class="panel-head"><span class="label">Prompt voor Gemini</span></div>
+    <div class="doc" id="promptText">
+      <p class="lead">Je neemt een lopend e-commerce project over. Hieronder staat exact wat al is uitgewerkt en besloten. Lees dit volledig door voordat je reageert — geef daarna aan wat je begrijpt en stel vervolgvragen alleen over wat écht ontbreekt.</p>
+
+      <h2>Project</h2>
+      <p>E-commerce onderneming in de reis-niche. Focus op hoogwaardige, praktische reisartikelen (koffers, crossbody tasjes, rugtassen) en slimme comfortproducten (kant-en-klare vliegtuig-comfortpakketten, reisorganizers).</p>
+
+      <h2>Werktitel merk</h2>
+      <p><strong>Basepacker</strong> — nog niet definitief. Vorige werktitel "Voya" is losgelaten na domeincheck: domein en logische varianten allemaal bezet, plus een serieus merkenrisico doordat "Voya" al een grote, beursgenoteerde Amerikaanse financiële dienstverlener is. <span class="free-tag">● basepacker.com is vrij</span> — merkencheck (BOIP/EUIPO/USPTO) moet nog gebeuren voordat de naam definitief is.</p>
+
+      <h2>Strategische kernbeslissing</h2>
+      <p>Het merk lanceert direct internationaal, niet alleen NL/België. De webshop, productteksten en e-mails zijn volledig in het Engels.</p>
+
+      <h2>Doelgroep</h2>
+      <p>Internationale reizigers, 28-55 jaar, zwaartepunt West-Europa (NL, België, Duitsland, Scandinavië) + Engelstalige markten (VK, VS, Canada, Australië). Hoger opgeleid, werkend, besteedbaar inkomen voor 2-4 reizen per jaar. Waarderen structuur/controle, zien reizen als investering in kwaliteitstijd, zijn kwaliteitsbewust maar niet prijsonverschillig, oriënteren uitgebreid online vóór aankoop.</p>
+
+      <h2>Drie buyer persona's</h2>
+      <p class="lead">Elk met koopmotieven, online oriëntatiegedrag en productpagina-objections al uitgewerkt.</p>
+      <ol>
+        <li><strong>De Georganiseerde Familiereiziger</strong> — structuur/overzicht voor gezin, auto- en vliegvakanties</li>
+        <li><strong>De Efficiënte Vlieger/Stedentripper</strong> — handbagage-optimalisatie, comfort, kant-en-klare pakketten</li>
+        <li><strong>De Praktische Avonturier</strong> — degelijke rugtassen/tasjes, multifunctioneel</li>
+      </ol>
+
+      <h2>Merkidentiteit (volledig uitgewerkt)</h2>
+      <ul>
+        <li>Missie, visie, 4 kernwaarden, belofte aan de reiziger</li>
+        <li>Tone-of-voice-principes met Engelse voorbeeldcopy (welkomstmail + productomschrijving comfortpakket)</li>
+        <li>Kleurenpalet: dieptenblauw <code>#1D3B53</code>, zandbeige <code>#E8DCC8</code>, terracotta <code>#C97B4A</code>, mosgroen <code>#4F6357</code>, off-white <code>#FAF8F4</code>, antraciet <code>#2B2B2B</code></li>
+        <li>Typografie: kop — Sohne/Fraunces/General Sans, body — Inter/Public Sans</li>
+        <li>Beeldtaal-richtlijnen</li>
+      </ul>
+
+      <h2>Pijnpunten → oplossingen</h2>
+      <p>Volledige tabel gekoppeld aan het productaanbod, per reisfase (vóór/tijdens/na de reis).</p>
+
+      <h2>Platformkeuzes (definitief)</h2>
+      <ul>
+        <li>Shopify, thema <strong>Dawn</strong></li>
+        <li>Abonnement: <strong>Basic</strong> (al actief)</li>
+        <li>Sticky add-to-cart app: <strong>EA Sticky Add to Cart Drawer</strong> (gratis) — Dawn heeft dit niet native</li>
+        <li>Reviews/UGC-app: <strong>Judge.me</strong> (gratis plan), later evt. Loox bij hoger volume</li>
+        <li>Bekende beperking: Dawn heeft geen native sticky cart of UGC-blok, wél goed voor maattabellen/FAQ/probleem-oplossing-secties via ingebouwde secties</li>
+      </ul>
+
+      <h2>Landingspagina-structuur</h2>
+      <p>Volledige homepage-opbouw (hero, trust-strip, shop-by-need-secties per persona, probleem/oplossing-GIF-sectie, bestseller-carousel, UGC/reviews-blok, merkverhaal, nieuwsbrief) en productpagina-volgorde (galerij, sticky cart, trust-badges, maattabel, FAQ, bundel/upsell) zijn uitgewerkt.</p>
+
+      <h2>5 placeholder-producten</h2>
+      <p>Fictief, om structuur te testen vóór echte sourcing: Carry-On koffer, Family Road Trip Organizer Set, Flight Comfort Set, Everyday Explorer Backpack, City Crossbody — elk gekoppeld aan een persona en shop-by-need-sectie.</p>
+
+      <h2>Sourcing-proces</h2>
+      <p>Een vast template staat klaar voor het beoordelen van Taobao/BuckyDrop-producten (prijs/marge, kwaliteit, verzending, concurrentie, risico's, go/no-go) — nog geen echte producten hierin verwerkt.</p>
+
+      <h2>Waar we nu staan (roadmap, fase-gewijs)</h2>
+      <ul>
+        <li><strong>Fase 0</strong> (fundament: strategie, platform, apps, structuur) — afgerond</li>
+        <li><strong>Fase 1</strong> (merknaam definitief maken) — loopt nu: Voya afgevallen, Basepacker is de kandidaat, domein bevestigd vrij, merkencheck moet nog</li>
+        <li><strong>Fase 2 t/m 7</strong> (dev-omgeving, sourcing, visuele identiteit, content, juridisch, marketing) — nog niet gestart</li>
+      </ul>
+
+      <h2>Vraag aan jou</h2>
+      <p id="askLine" style="font-style:italic; color:var(--text-dim);">[wordt hieronder ingevuld]</p>
+    </div>
+
+    <div class="ask-box">
+      <div class="label">Jouw concrete vraag aan Gemini</div>
+      <input id="askInput" type="text" placeholder="bijv. Doe een merkencheck voor Basepacker in BOIP/EUIPO/USPTO" oninput="updateAsk()">
+      <div class="hint">Typ hier je vraag — die wordt automatisch verwerkt in de prompt hierboven én in de kopieerknop.</div>
+    </div>
+  </div>
+
+  <footer>Basepacker · projectoverdracht gegenereerd 26-09-2026</footer>
+</div>
+
+<script>
+function updateAsk(){
+  try{
+    const val = document.getElementById('askInput').value.trim();
+    document.getElementById('askLine').textContent = val ? val : '[wordt hieronder ingevuld]';
+  }catch(e){}
+}
+
+function buildPlainText(){
+  const askVal = (document.getElementById('askInput').value || '').trim();
+  const ask = askVal ? askVal : '[vul hier aan wat je specifiek van Gemini nodig hebt]';
+  return `Je neemt een lopend e-commerce project over. Hieronder staat exact wat al is uitgewerkt en besloten. Lees dit volledig door voordat je reageert — geef daarna aan wat je begrijpt en stel vervolgvragen alleen over wat écht ontbreekt.
+
+PROJECT
+E-commerce onderneming in de reis-niche. Focus op hoogwaardige, praktische reisartikelen (koffers, crossbody tasjes, rugtassen) en slimme comfortproducten (kant-en-klare vliegtuig-comfortpakketten, reisorganizers).
+
+WERKTITEL MERK
+Basepacker — nog niet definitief. Vorige werktitel "Voya" is losgelaten na domeincheck: domein en logische varianten allemaal bezet, plus een serieus merkenrisico doordat "Voya" al een grote, beursgenoteerde Amerikaanse financiële dienstverlener is. basepacker.com is vrij (bevestigd). Merkencheck (BOIP/EUIPO/USPTO) moet nog gebeuren voordat de naam definitief is.
+
+STRATEGISCHE KERNBESLISSING
+Het merk lanceert direct internationaal, niet alleen NL/België. De webshop, productteksten en e-mails zijn volledig in het Engels.
+
+DOELGROEP
+Internationale reizigers, 28-55 jaar, zwaartepunt West-Europa (NL, België, Duitsland, Scandinavië) + Engelstalige markten (VK, VS, Canada, Australië). Hoger opgeleid, werkend, besteedbaar inkomen voor 2-4 reizen per jaar. Waarderen structuur/controle, zien reizen als investering in kwaliteitstijd, zijn kwaliteitsbewust maar niet prijsonverschillig, oriënteren uitgebreid online vóór aankoop.
+
+DRIE BUYER PERSONA'S (koopmotieven, online oriëntatiegedrag en productpagina-objections al uitgewerkt)
+1. De Georganiseerde Familiereiziger — structuur/overzicht voor gezin, auto- en vliegvakanties
+2. De Efficiënte Vlieger/Stedentripper — handbagage-optimalisatie, comfort, kant-en-klare pakketten
+3. De Praktische Avonturier — degelijke rugtassen/tasjes, multifunctioneel
+
+MERKIDENTITEIT (volledig uitgewerkt)
+- Missie, visie, 4 kernwaarden, belofte aan de reiziger
+- Tone-of-voice-principes met Engelse voorbeeldcopy (welkomstmail + productomschrijving comfortpakket)
+- Kleurenpalet: dieptenblauw #1D3B53, zandbeige #E8DCC8, terracotta #C97B4A, mosgroen #4F6357, off-white #FAF8F4, antraciet #2B2B2B
+- Typografie: kop — Sohne/Fraunces/General Sans, body — Inter/Public Sans
+- Beeldtaal-richtlijnen
+
+PIJNPUNTEN → OPLOSSINGEN
+Volledige tabel gekoppeld aan het productaanbod, per reisfase (vóór/tijdens/na de reis).
+
+PLATFORMKEUZES (definitief)
+- Shopify, thema Dawn
+- Abonnement: Basic (al actief)
+- Sticky add-to-cart app: EA Sticky Add to Cart Drawer (gratis) — Dawn heeft dit niet native
+- Reviews/UGC-app: Judge.me (gratis plan), later evt. Loox bij hoger volume
+- Bekende beperking: Dawn heeft geen native sticky cart of UGC-blok, wél goed voor maattabellen/FAQ/probleem-oplossing-secties via ingebouwde secties
+
+LANDINGSPAGINA-STRUCTUUR
+Volledige homepage-opbouw (hero, trust-strip, shop-by-need-secties per persona, probleem/oplossing-GIF-sectie, bestseller-carousel, UGC/reviews-blok, merkverhaal, nieuwsbrief) en productpagina-volgorde (galerij, sticky cart, trust-badges, maattabel, FAQ, bundel/upsell) zijn uitgewerkt.
+
+5 PLACEHOLDER-PRODUCTEN
+Fictief, om structuur te testen vóór echte sourcing: Carry-On koffer, Family Road Trip Organizer Set, Flight Comfort Set, Everyday Explorer Backpack, City Crossbody — elk gekoppeld aan een persona en shop-by-need-sectie.
+
+SOURCING-PROCES
+Een vast template staat klaar voor het beoordelen van Taobao/BuckyDrop-producten (prijs/marge, kwaliteit, verzending, concurrentie, risico's, go/no-go) — nog geen echte producten hierin verwerkt.
+
+WAAR WE NU STAAN (roadmap, fase-gewijs)
+- Fase 0 (fundament: strategie, platform, apps, structuur) — afgerond
+- Fase 1 (merknaam definitief maken) — loopt nu: Voya afgevallen, Basepacker is de kandidaat, domein bevestigd vrij, merkencheck moet nog
+- Fase 2 t/m 7 (dev-omgeving, sourcing, visuele identiteit, content, juridisch, marketing) — nog niet gestart
+
+VRAAG AAN JOU
+${ask}`;
+}
+
+async function copyPrompt(){
+  const btn = document.getElementById('copyBtn');
+  const label = document.getElementById('copyLabel');
+  const text = buildPlainText();
+  try{
+    await navigator.clipboard.writeText(text);
+  }catch(e){
+    try{
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    }catch(e2){}
+  }
+  btn.classList.add('copied');
+  const prev = label.textContent;
+  label.textContent = 'Gekopieerd!';
+  setTimeout(()=>{ btn.classList.remove('copied'); label.textContent = prev; }, 1800);
+}
+</script>

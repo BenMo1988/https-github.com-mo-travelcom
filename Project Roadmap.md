@@ -4,7 +4,8 @@ Laatst bijgewerkt: 26-09-2026. Vink af naarmate stappen worden afgerond.
 
 ## ✅ Fase 0 — Fundament (afgerond)
 
-- [x] Werknaam vastgesteld voor documentatie/placeholder-doeleinden: **Voya** (nog geen definitieve merknaamkeuze)
+- [x] Werknaam vastgesteld voor documentatie/placeholder-doeleinden: **Basepacker** (nog geen definitieve merknaamkeuze — Voya afgevallen na domein-/merkenrisico)
+- [x] **basepacker.com bevestigd vrij** (26-09-2026)
 - [x] Markt bepaald: internationaal, Engelstalige webshop
 - [x] Platform gekozen: **Shopify**
 - [x] Thema gekozen: **Dawn**
@@ -20,7 +21,7 @@ Laatst bijgewerkt: 26-09-2026. Vink af naarmate stappen worden afgerond.
 
 ## 🔲 Fase 1 — Merknaam definitief maken
 
-**Status:** nog geen enkele naam definitief gekozen. Kandidaten uit `Merkstrategie...md`: Voya, Stowe, Departure Co., Wayfare Co., Enroute. "Voya" wordt tot dusver alleen als werktitel/placeholder gebruikt in documentatie.
+**Status:** nog geen naam definitief gekozen. Voya, Stowe, Departure Co., Wayfare Co. en Enroute zijn afgevallen (domein bezet). Huidige kandidaat: **Basepacker** — **basepacker.com is vrij** (bevestigd 26-09-2026). Merkencheck moet nog gebeuren voordat dit definitief is.
 
 ### 1.1 Vooronderzoek per kandidaat
 - [ ] Domeincheck **Voya** (.com, .nl, .co, relevante extensies)
@@ -90,8 +91,16 @@ Laatst bijgewerkt: 26-09-2026. Vink af naarmate stappen worden afgerond.
 
 ## 🔲 Fase 7 — Marketing & launch
 
-- [ ] Social media / contentkalender opzetten
-- [ ] Launch-strategie bepalen (organisch vs. betaalde ads)
+**Acquisitiestrategie (besloten 26-09-2026):** start organisch (UGC/short-form video), pas daarna betaalde ads.
+1. **Organische UGC/short-form video eerst** — zodra de eerste échte producten binnen zijn (Fase 3), content maken die aansluit op de probleem/oplossing-GIF-strategie uit `Landingspagina Structuur.md`. Dit levert tegelijk het materiaal voor de site zelf.
+2. **Betaalde Meta/TikTok Ads daarna** — zodra er winnende organische creatives zijn geïdentificeerd, die opschalen met budget.
+3. **Google Search (intentie-gedreven) als secundair kanaal** — pas inzetten zodra er voldoende reviews/vertrouwen op de site staat; sterk voor hoog-intentie termen als "best carry-on luggage" (sluit aan op persona 2's zoekgedrag).
+
+- [ ] Social media / contentkalender opzetten (gericht op organische UGC/video)
+- [ ] Eerste organische content maken zodra Fase 3-producten binnen zijn
+- [ ] Winnende organische creatives identificeren
+- [ ] Overstap naar betaalde Meta/TikTok Ads voorbereiden
+- [ ] Google Search-strategie (intentie-termen) uitwerken als secundair kanaal
 - [ ] Eerste campagne voorbereiden rond launch-datum
 
 ---
