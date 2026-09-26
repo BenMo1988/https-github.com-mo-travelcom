@@ -50,13 +50,16 @@ Laatst bijgewerkt: 26-09-2026. Vink af naarmate stappen worden afgerond.
 
 ## 🔲 Fase 2 — Dev-omgeving inrichten
 
-- [ ] Besluit: bouwen in bestaande Basic-winkel (wachtwoordscherm aan) of aparte dev store
-- [ ] Dawn-thema activeren en basisinstellingen configureren
+- [x] Besluit: bouwen in bestaande Basic-winkel (wachtwoordscherm aan) of aparte dev store — **bestaande winkel, status Private** (26-09-2026)
+- [ ] Dawn-thema activeren en basisinstellingen configureren — Dawn is actief; basisinstellingen (kleuren, fonts) nog doen
 - [ ] EA Sticky Add to Cart Drawer installeren en instellen
 - [ ] Judge.me installeren en instellen
-- [ ] 5 placeholder-producten invoeren
+- [x] 5 placeholder-producten invoeren — als concept via CSV-import, `shopify/data/placeholder-products.csv` (26-09-2026)
 - [ ] Homepage-secties bouwen conform `Landingspagina Structuur.md`
 - [ ] Productpagina-template bouwen conform `Productpagina Elementen.md`
+  - [x] Product-metafields `basepacker.*` aangemaakt (maten, gewicht, inhoud, materiaal)
+  - [x] Sectie "Travel specs & fit" (maattabel + airline-check) live op de productpagina, onder productinformatie
+  - [x] Trust-badges / USP-balk onder de CTA (sectie "USP bar", direct onder productinformatie)
 - [ ] Structuur visueel testen op desktop + mobiel
 
 ## 🔲 Fase 3 — Sourcing (echte producten)

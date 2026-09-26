@@ -1,4 +1,4 @@
-<title>Basepacker Travel Specs</title>
+<title>Basepacker Product Page</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;600&display=swap">
 <style>
@@ -14,7 +14,8 @@
     --font-heading-family: 'Fraunces', Georgia, serif;
     --font-body-family: 'Inter', system-ui, sans-serif;
   }
-  .page-width { max-width: 120rem; margin: 0 auto; padding: 0 1.6rem; }
+  .page-width { max-width: 120rem; margin: 0 auto; padding: 0 1.5rem; }
+  .visually-hidden { position: absolute !important; overflow: hidden; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); word-wrap: normal !important; }
   @media (min-width: 750px) { .page-width { padding: 0 5rem; } }
   .pv-bar { background: #1D3B53; color: #FAF8F4; padding-block: 1.2rem; }
   .pv-bar .page-width { display: flex; flex-wrap: wrap; gap: 0.8rem 1.6rem; align-items: center; }
@@ -36,12 +37,136 @@
   </div>
 </div>
 <div data-pv-panel="0"><style>
-  .section-preview-0-padding {
+  .section-bp-usp-bar-0-padding {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-usp-bar-0-padding {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+</style>
+
+<style>
+  .bp-usp {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    display: block;
+    background: var(--bp-usp-bg);
+    color: var(--bp-anthracite);
+  }
+  .bp-usp--sand { --bp-usp-bg: var(--bp-sand); --bp-usp-card: rgba(250, 248, 244, 0.6); }
+  .bp-usp--off-white { --bp-usp-bg: var(--bp-off-white); --bp-usp-card: var(--bp-sand); }
+  .bp-usp__heading {
+    margin: 0 0 1.6rem;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    color: var(--bp-deep-blue);
+  }
+  .bp-usp__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(24rem, 78%);
+    gap: 1.2rem;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .bp-usp__list::-webkit-scrollbar { display: none; }
+  .bp-usp__list[data-more] {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+  .bp-usp__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-usp-card);
+    scroll-snap-align: start;
+  }
+  .bp-usp__icon { width: 2.8rem; height: 2.8rem; color: var(--bp-deep-blue); }
+  .bp-usp__text { display: grid; gap: 0.2rem; margin: 0; font-size: 1.4rem; line-height: 1.45; }
+  .bp-usp__text strong { font-size: 1.5rem; color: var(--bp-deep-blue); }
+  .bp-usp__text a { color: inherit; text-underline-offset: 0.3rem; }
+  .bp-usp__text a:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  @media screen and (min-width: 750px) {
+    .bp-usp__list {
+      grid-auto-columns: minmax(0, 1fr);
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+    .bp-usp__list[data-more] { -webkit-mask-image: none; mask-image: none; }
+  }
+</style><bp-usp class="bp-usp bp-usp--sand section-bp-usp-bar-0-padding">
+    <div class="page-width">
+      <h2 class="bp-usp__heading visually-hidden">Why travel with Basepacker</h2>
+      <ul class="bp-usp__list" role="list"><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+            <p class="bp-usp__text"><strong>Tracked shipping</strong><span>Follow your order from our warehouse to your door.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+            <p class="bp-usp__text"><strong>14-day returns</strong><span>Changed your mind? Send it back within 14 days.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            <p class="bp-usp__text"><strong>2-year warranty</strong><span>Built for many trips, and covered if it isn&#39;t.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <p class="bp-usp__text"><strong>Secure checkout</strong><span>Pay safely with Shopify Checkout.</span>
+            </p>
+          </li></ul>
+    </div>
+  </bp-usp><script>
+  // Fades the right edge on mobile while more items are hidden off-screen.
+  if (!customElements.get('bp-usp')) {
+    customElements.define(
+      'bp-usp',
+      class BpUsp extends HTMLElement {
+        connectedCallback() {
+          this.list = this.querySelector('.bp-usp__list');
+          if (!this.list) return;
+          this.update = () => {
+            const hidden = this.list.scrollWidth - this.list.clientWidth - this.list.scrollLeft;
+            this.list.toggleAttribute('data-more', hidden > 4);
+          };
+          this.list.addEventListener('scroll', this.update, { passive: true });
+          this.observer = new ResizeObserver(this.update);
+          this.observer.observe(this.list);
+          this.update();
+        }
+
+        disconnectedCallback() {
+          if (this.observer) this.observer.disconnect();
+        }
+      }
+    );
+  }
+</script>
+
+
+<style>
+  .section-bp-travel-specs-0-padding {
     padding-top: 27px;
     padding-bottom: 27px;
   }
   @media screen and (min-width: 750px) {
-    .section-preview-0-padding {
+    .section-bp-travel-specs-0-padding {
       padding-top: 36px;
       padding-bottom: 36px;
     }
@@ -156,7 +281,7 @@
       grid-template-areas: "airline limit detail pill";
     }
   }
-</style><bp-specs class="bp-specs section-preview-0-padding" data-default-unit="metric">
+</style><bp-specs class="bp-specs section-bp-travel-specs-0-padding" data-default-unit="metric">
     <div class="page-width bp-specs__inner">
       <div class="bp-specs__head">
         <div><p class="bp-specs__eyebrow">Specs &amp; fit</p><h2 class="bp-specs__title">Will it fit in the cabin?</h2>
@@ -302,12 +427,136 @@
 
 </div>
 <div data-pv-panel="1" hidden><style>
-  .section-preview-1-padding {
+  .section-bp-usp-bar-1-padding {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-usp-bar-1-padding {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+</style>
+
+<style>
+  .bp-usp {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    display: block;
+    background: var(--bp-usp-bg);
+    color: var(--bp-anthracite);
+  }
+  .bp-usp--sand { --bp-usp-bg: var(--bp-sand); --bp-usp-card: rgba(250, 248, 244, 0.6); }
+  .bp-usp--off-white { --bp-usp-bg: var(--bp-off-white); --bp-usp-card: var(--bp-sand); }
+  .bp-usp__heading {
+    margin: 0 0 1.6rem;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    color: var(--bp-deep-blue);
+  }
+  .bp-usp__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(24rem, 78%);
+    gap: 1.2rem;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .bp-usp__list::-webkit-scrollbar { display: none; }
+  .bp-usp__list[data-more] {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+  .bp-usp__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-usp-card);
+    scroll-snap-align: start;
+  }
+  .bp-usp__icon { width: 2.8rem; height: 2.8rem; color: var(--bp-deep-blue); }
+  .bp-usp__text { display: grid; gap: 0.2rem; margin: 0; font-size: 1.4rem; line-height: 1.45; }
+  .bp-usp__text strong { font-size: 1.5rem; color: var(--bp-deep-blue); }
+  .bp-usp__text a { color: inherit; text-underline-offset: 0.3rem; }
+  .bp-usp__text a:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  @media screen and (min-width: 750px) {
+    .bp-usp__list {
+      grid-auto-columns: minmax(0, 1fr);
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+    .bp-usp__list[data-more] { -webkit-mask-image: none; mask-image: none; }
+  }
+</style><bp-usp class="bp-usp bp-usp--sand section-bp-usp-bar-1-padding">
+    <div class="page-width">
+      <h2 class="bp-usp__heading visually-hidden">Why travel with Basepacker</h2>
+      <ul class="bp-usp__list" role="list"><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+            <p class="bp-usp__text"><strong>Tracked shipping</strong><span>Follow your order from our warehouse to your door.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+            <p class="bp-usp__text"><strong>14-day returns</strong><span>Changed your mind? Send it back within 14 days.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            <p class="bp-usp__text"><strong>2-year warranty</strong><span>Built for many trips, and covered if it isn&#39;t.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <p class="bp-usp__text"><strong>Secure checkout</strong><span>Pay safely with Shopify Checkout.</span>
+            </p>
+          </li></ul>
+    </div>
+  </bp-usp><script>
+  // Fades the right edge on mobile while more items are hidden off-screen.
+  if (!customElements.get('bp-usp')) {
+    customElements.define(
+      'bp-usp',
+      class BpUsp extends HTMLElement {
+        connectedCallback() {
+          this.list = this.querySelector('.bp-usp__list');
+          if (!this.list) return;
+          this.update = () => {
+            const hidden = this.list.scrollWidth - this.list.clientWidth - this.list.scrollLeft;
+            this.list.toggleAttribute('data-more', hidden > 4);
+          };
+          this.list.addEventListener('scroll', this.update, { passive: true });
+          this.observer = new ResizeObserver(this.update);
+          this.observer.observe(this.list);
+          this.update();
+        }
+
+        disconnectedCallback() {
+          if (this.observer) this.observer.disconnect();
+        }
+      }
+    );
+  }
+</script>
+
+
+<style>
+  .section-bp-travel-specs-1-padding {
     padding-top: 27px;
     padding-bottom: 27px;
   }
   @media screen and (min-width: 750px) {
-    .section-preview-1-padding {
+    .section-bp-travel-specs-1-padding {
       padding-top: 36px;
       padding-bottom: 36px;
     }
@@ -422,7 +671,7 @@
       grid-template-areas: "airline limit detail pill";
     }
   }
-</style><bp-specs class="bp-specs section-preview-1-padding" data-default-unit="metric">
+</style><bp-specs class="bp-specs section-bp-travel-specs-1-padding" data-default-unit="metric">
     <div class="page-width bp-specs__inner">
       <div class="bp-specs__head">
         <div><p class="bp-specs__eyebrow">Specs &amp; fit</p><h2 class="bp-specs__title">Will it fit in the cabin?</h2>

@@ -1,0 +1,218 @@
+{%- comment -%}
+  Basepacker — USP / trust bar
+  Short trust points (shipping, returns, warranty, checkout) as blocks.
+  Scrolls horizontally on mobile, fills one row on desktop.
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<style>
+  .bp-usp {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    display: block;
+    background: var(--bp-usp-bg);
+    color: var(--bp-anthracite);
+  }
+  .bp-usp--sand { --bp-usp-bg: var(--bp-sand); --bp-usp-card: rgba(250, 248, 244, 0.6); }
+  .bp-usp--off-white { --bp-usp-bg: var(--bp-off-white); --bp-usp-card: var(--bp-sand); }
+  .bp-usp__heading {
+    margin: 0 0 1.6rem;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    color: var(--bp-deep-blue);
+  }
+  .bp-usp__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(24rem, 78%);
+    gap: 1.2rem;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .bp-usp__list::-webkit-scrollbar { display: none; }
+  .bp-usp__list[data-more] {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+  .bp-usp__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-usp-card);
+    scroll-snap-align: start;
+  }
+  .bp-usp__icon { width: 2.8rem; height: 2.8rem; color: var(--bp-deep-blue); }
+  .bp-usp__text { display: grid; gap: 0.2rem; margin: 0; font-size: 1.4rem; line-height: 1.45; }
+  .bp-usp__text strong { font-size: 1.5rem; color: var(--bp-deep-blue); }
+  .bp-usp__text a { color: inherit; text-underline-offset: 0.3rem; }
+  .bp-usp__text a:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  @media screen and (min-width: 750px) {
+    .bp-usp__list {
+      grid-auto-columns: minmax(0, 1fr);
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+    .bp-usp__list[data-more] { -webkit-mask-image: none; mask-image: none; }
+  }
+</style>
+
+{%- if section.blocks.size > 0 -%}
+  <bp-usp class="bp-usp bp-usp--{{ section.settings.background }} section-{{ section.id }}-padding">
+    <div class="page-width">
+      <h2 class="bp-usp__heading{% unless section.settings.show_heading %} visually-hidden{% endunless %}">
+        {{- section.settings.heading | escape -}}
+      </h2>
+      <ul class="bp-usp__list" role="list">
+        {%- for block in section.blocks -%}
+          <li class="bp-usp__item" {{ block.shopify_attributes }}>
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+              {%- case block.settings.icon -%}
+                {%- when 'truck' -%}
+                  <path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/>
+                {%- when 'return' -%}
+                  <path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/>
+                {%- when 'shield' -%}
+                  <path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/>
+                {%- when 'lock' -%}
+                  <rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+                {%- when 'plane' -%}
+                  <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/>
+                {%- when 'globe' -%}
+                  <circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+                {%- when 'chat' -%}
+                  <path d="M4 5h16v11H8l-4 4z"/>
+                {%- else -%}
+                  <path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>
+              {%- endcase -%}
+            </svg>
+            <p class="bp-usp__text">
+              {%- if block.settings.link != blank -%}
+                <strong><a href="{{ block.settings.link }}">{{ block.settings.title | escape }}</a></strong>
+              {%- else -%}
+                <strong>{{ block.settings.title | escape }}</strong>
+              {%- endif -%}
+              <span>{{ block.settings.text | escape }}</span>
+            </p>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </bp-usp>
+{%- endif -%}
+
+<script>
+  // Fades the right edge on mobile while more items are hidden off-screen.
+  if (!customElements.get('bp-usp')) {
+    customElements.define(
+      'bp-usp',
+      class BpUsp extends HTMLElement {
+        connectedCallback() {
+          this.list = this.querySelector('.bp-usp__list');
+          if (!this.list) return;
+          this.update = () => {
+            const hidden = this.list.scrollWidth - this.list.clientWidth - this.list.scrollLeft;
+            this.list.toggleAttribute('data-more', hidden > 4);
+          };
+          this.list.addEventListener('scroll', this.update, { passive: true });
+          this.observer = new ResizeObserver(this.update);
+          this.observer.observe(this.list);
+          this.update();
+        }
+
+        disconnectedCallback() {
+          if (this.observer) this.observer.disconnect();
+        }
+      }
+    );
+  }
+</script>
+
+{% schema %}
+{
+  "name": "USP bar",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "select",
+      "id": "background",
+      "label": "Background",
+      "options": [
+        { "value": "sand", "label": "Sand" },
+        { "value": "off-white", "label": "Off-white" }
+      ],
+      "default": "sand"
+    },
+    { "type": "checkbox", "id": "show_heading", "label": "Show heading", "default": false },
+    { "type": "text", "id": "heading", "label": "Heading", "info": "Always read out by screen readers, even when hidden", "default": "Why travel with Basepacker" },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 24 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 24 }
+  ],
+  "blocks": [
+    {
+      "type": "usp",
+      "name": "USP",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            { "value": "truck", "label": "Truck" },
+            { "value": "return", "label": "Return arrow" },
+            { "value": "shield", "label": "Shield" },
+            { "value": "lock", "label": "Lock" },
+            { "value": "plane", "label": "Plane" },
+            { "value": "globe", "label": "Globe" },
+            { "value": "chat", "label": "Chat" },
+            { "value": "star", "label": "Star" }
+          ],
+          "default": "truck"
+        },
+        { "type": "text", "id": "title", "label": "Title", "default": "Tracked shipping" },
+        { "type": "text", "id": "text", "label": "Text", "default": "Follow your order from our warehouse to your door." },
+        { "type": "url", "id": "link", "label": "Link", "info": "Optional, e.g. your shipping or returns policy" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "USP bar",
+      "blocks": [
+        { "type": "usp", "settings": { "icon": "truck", "title": "Tracked shipping", "text": "Follow your order from our warehouse to your door." } },
+        { "type": "usp", "settings": { "icon": "return", "title": "14-day returns", "text": "Changed your mind? Send it back within 14 days." } },
+        { "type": "usp", "settings": { "icon": "shield", "title": "2-year warranty", "text": "Built for many trips, and covered if it isn't." } },
+        { "type": "usp", "settings": { "icon": "lock", "title": "Secure checkout", "text": "Pay safely with Shopify Checkout." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -7,7 +7,9 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const sectionName = 'bp-travel-specs';
+// Sections in the order they appear on the product page
+const sectionNames = ['bp-usp-bar', 'bp-travel-specs'];
+const outName = 'bp-travel-specs';
 
 // Placeholder products from "Voorbeeldproducten - Placeholder.md"
 const products = [
@@ -21,33 +23,50 @@ const products = [
   },
 ];
 
-const source = readFileSync(join(root, 'sections', `${sectionName}.liquid`), 'utf8');
-const schema = JSON.parse(source.match(/{%\s*schema\s*%}([\s\S]*?){%\s*endschema\s*%}/)[1]);
-const template = source
-  .replace(/{%\s*schema\s*%}[\s\S]*?{%\s*endschema\s*%}/, '')
-  .replace(/{%-?\s*style\s*-?%}/g, '<style>')
-  .replace(/{%-?\s*endstyle\s*-?%}/g, '</style>');
+// Load a section file and fill it with its schema defaults and first preset, like the theme editor does
+function loadSection(name) {
+  const source = readFileSync(join(root, 'sections', `${name}.liquid`), 'utf8');
+  const schema = JSON.parse(source.match(/{%\s*schema\s*%}([\s\S]*?){%\s*endschema\s*%}/)[1]);
+  const template = source
+    .replace(/{%\s*schema\s*%}[\s\S]*?{%\s*endschema\s*%}/, '')
+    .replace(/{%-?\s*style\s*-?%}/g, '<style>')
+    .replace(/{%-?\s*endstyle\s*-?%}/g, '</style>');
+  const settings = Object.fromEntries(
+    schema.settings.filter((s) => 'default' in s).map((s) => [s.id, s.default])
+  );
+  const blockDefaults = Object.fromEntries(
+    (schema.blocks || []).map((b) => [
+      b.type,
+      Object.fromEntries((b.settings || []).filter((s) => 'default' in s).map((s) => [s.id, s.default])),
+    ])
+  );
+  const blocks = (schema.presets?.[0]?.blocks || []).map((b) => ({
+    ...b,
+    settings: { ...blockDefaults[b.type], ...b.settings },
+    shopify_attributes: '',
+  }));
+  return { name, template, settings, blocks };
+}
 
-const settings = Object.fromEntries(
-  schema.settings.filter((s) => 'default' in s).map((s) => [s.id, s.default])
-);
-const blocks = schema.presets[0].blocks.map((b) => ({ ...b, shopify_attributes: '' }));
-
+const sections = sectionNames.map(loadSection);
 const engine = new Liquid();
 const wrap = (mf) => Object.fromEntries(Object.entries(mf).map(([k, v]) => [k, { value: v }]));
 
 const panels = [];
 for (const [i, p] of products.entries()) {
-  const html = await engine.parseAndRender(template, {
-    product: { title: p.title, metafields: { basepacker: wrap(p.metafields) } },
-    section: { id: `preview-${i}`, settings, blocks },
-    localization: { country: { iso_code: 'NL' } },
-    request: { design_mode: false },
-  });
+  let html = '';
+  for (const s of sections) {
+    html += await engine.parseAndRender(s.template, {
+      product: { title: p.title, metafields: { basepacker: wrap(p.metafields) } },
+      section: { id: `${s.name}-${i}`, settings: s.settings, blocks: s.blocks },
+      localization: { country: { iso_code: 'NL' } },
+      request: { design_mode: false },
+    });
+  }
   panels.push({ title: p.title, html });
 }
 
-const page = `<title>Basepacker Travel Specs</title>
+const page = `<title>Basepacker Product Page</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;600&display=swap">
 <style>
@@ -63,7 +82,8 @@ const page = `<title>Basepacker Travel Specs</title>
     --font-heading-family: 'Fraunces', Georgia, serif;
     --font-body-family: 'Inter', system-ui, sans-serif;
   }
-  .page-width { max-width: 120rem; margin: 0 auto; padding: 0 1.6rem; }
+  .page-width { max-width: 120rem; margin: 0 auto; padding: 0 1.5rem; }
+  .visually-hidden { position: absolute !important; overflow: hidden; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0; clip: rect(0 0 0 0); word-wrap: normal !important; }
   @media (min-width: 750px) { .page-width { padding: 0 5rem; } }
   .pv-bar { background: #1D3B53; color: #FAF8F4; padding-block: 1.2rem; }
   .pv-bar .page-width { display: flex; flex-wrap: wrap; gap: 0.8rem 1.6rem; align-items: center; }
@@ -94,6 +114,6 @@ ${panels.map((p, i) => `<div data-pv-panel="${i}"${i === 0 ? '' : ' hidden'}>${p
 `;
 
 mkdirSync(join(root, 'preview'), { recursive: true });
-const out = join(root, 'preview', `${sectionName}.html`);
+const out = join(root, 'preview', `${outName}.html`);
 writeFileSync(out, page);
 console.log('Preview written to', out);
