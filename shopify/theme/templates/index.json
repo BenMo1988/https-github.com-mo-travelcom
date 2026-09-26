@@ -15,16 +15,23 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Browse our latest products",
+            "heading": "Travel light. Arrive ready.",
             "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "Smart organisers, carry-ons and comfort kits that take the stress out of packing — so the trip starts the moment you leave home.",
+            "text_style": "body"
           }
         },
         "button": {
           "type": "buttons",
           "settings": {
-            "button_label_1": "Shop all",
+            "button_label_1": "Shop now",
             "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
+            "button_style_secondary_1": false,
             "button_label_2": "",
             "button_link_2": "",
             "button_style_secondary_2": false
@@ -33,12 +40,13 @@
       },
       "block_order": [
         "heading",
+        "text",
         "button"
       ],
       "settings": {
         "image_overlay_opacity": 40,
         "image_height": "large",
-        "desktop_content_position": "bottom-center",
+        "desktop_content_position": "middle-center",
         "show_text_box": false,
         "image_behavior": "none",
         "desktop_content_alignment": "center",
@@ -48,37 +56,342 @@
         "show_text_below": false
       }
     },
+    "usp_bar": {
+      "type": "bp-usp-bar",
+      "blocks": {
+        "usp_shipping": {
+          "type": "usp",
+          "settings": {
+            "icon": "truck",
+            "title": "Tracked shipping",
+            "text": "Follow your order from our warehouse to your door."
+          }
+        },
+        "usp_returns": {
+          "type": "usp",
+          "settings": {
+            "icon": "return",
+            "title": "14-day returns",
+            "text": "Changed your mind? Send it back within 14 days."
+          }
+        },
+        "usp_warranty": {
+          "type": "usp",
+          "settings": {
+            "icon": "shield",
+            "title": "2-year warranty",
+            "text": "Built for many trips, and covered if it isn't."
+          }
+        },
+        "usp_checkout": {
+          "type": "usp",
+          "settings": {
+            "icon": "lock",
+            "title": "Secure checkout",
+            "text": "Pay safely with Shopify Checkout."
+          }
+        }
+      },
+      "block_order": [
+        "usp_shipping",
+        "usp_returns",
+        "usp_warranty",
+        "usp_checkout"
+      ],
+      "settings": {
+        "background": "sand",
+        "show_heading": false,
+        "heading": "Why travel with Basepacker",
+        "padding_top": 24,
+        "padding_bottom": 24
+      }
+    },
+    "shop_by_need": {
+      "type": "multicolumn",
+      "blocks": {
+        "need_carry_on": {
+          "type": "column",
+          "settings": {
+            "title": "Carry-on only",
+            "text": "<p>One bag, no check-in. Organisers and packs that fit under the seat in front of you.</p>",
+            "link_label": "Shop carry-on",
+            "link": "shopify://collections/all"
+          }
+        },
+        "need_family": {
+          "type": "column",
+          "settings": {
+            "title": "Family road trips",
+            "text": "<p>Snacks, chargers and spare clothes where you can reach them — not at the bottom of the boot.</p>",
+            "link_label": "Shop family",
+            "link": "shopify://collections/all"
+          }
+        },
+        "need_weekend": {
+          "type": "column",
+          "settings": {
+            "title": "Weekend getaways",
+            "text": "<p>Pack on Friday in ten minutes. Compact bags and kits for two or three nights away.</p>",
+            "link_label": "Shop weekend",
+            "link": "shopify://collections/all"
+          }
+        }
+      },
+      "block_order": [
+        "need_carry_on",
+        "need_family",
+        "need_weekend"
+      ],
+      "settings": {
+        "title": "Shop by trip",
+        "heading_size": "h1",
+        "image_width": "full",
+        "image_ratio": "portrait",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "left",
+        "background_style": "none",
+        "color_scheme": "scheme-1",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 56,
+        "padding_bottom": 36
+      }
+    },
+    "problem_solution_1": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Before and after",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "From suitcase chaos to everything in its place",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Packing cubes split your bag into clear sections, so you find a clean shirt without unpacking the rest. Zip, stack, done.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop organisers",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "problem_solution_2": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "On the plane",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Land rested, not wrecked",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Neck pillow, eye mask and earplugs in one pouch that fits your front pocket. No digging through your bag at 30,000 feet.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop comfort kits",
+            "button_link": "shopify://collections/all",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "text_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
+        "title": "Bestsellers",
+        "heading_size": "h1",
         "description": "",
         "show_description": false,
         "description_style": "body",
         "collection": "all",
-        "products_to_show": 8,
-        "columns_desktop": 4,
+        "products_to_show": 6,
+        "columns_desktop": 3,
         "color_scheme": "scheme-1",
         "full_width": false,
         "show_view_all": true,
         "view_all_style": "solid",
         "enable_desktop_slider": false,
-        "swipe_on_mobile": false,
+        "swipe_on_mobile": true,
         "image_ratio": "adapt",
         "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
-        "quick_add": "none",
+        "quick_add": "standard",
         "columns_mobile": "2",
         "padding_top": 44,
         "padding_bottom": 36
+      }
+    },
+    "why_us": {
+      "type": "multicolumn",
+      "blocks": {
+        "value_thoughtful": {
+          "type": "column",
+          "settings": {
+            "title": "Thoughtful, not overloaded",
+            "text": "<p>Every product solves one real travel problem. No gimmicks, no features you'll never use.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "value_calm": {
+          "type": "column",
+          "settings": {
+            "title": "Calm is the point",
+            "text": "<p>We don't just sell bags. We sell knowing where everything is before you've even left.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "value_quality": {
+          "type": "column",
+          "settings": {
+            "title": "Made to travel for years",
+            "text": "<p>Durable materials and solid stitching, built for many trips — not just this summer.</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "value_thoughtful",
+        "value_calm",
+        "value_quality"
+      ],
+      "settings": {
+        "title": "Why Basepacker",
+        "heading_size": "h1",
+        "image_width": "third",
+        "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
+        "columns_desktop": 3,
+        "column_alignment": "center",
+        "background_style": "primary",
+        "color_scheme": "scheme-2",
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "padding_top": 56,
+        "padding_bottom": 56
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "10% off your first order",
+            "heading_size": "h1"
+          }
+        },
+        "paragraph": {
+          "type": "paragraph",
+          "settings": {
+            "text": "<p>Plus packing lists and travel tips, about once a month. Unsubscribe anytime.</p>"
+          }
+        },
+        "email_form": {
+          "type": "email_form",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 56,
+        "padding_bottom": 64
       }
     }
   },
   "order": [
     "image_banner",
-    "featured_collection"
+    "usp_bar",
+    "shop_by_need",
+    "problem_solution_1",
+    "problem_solution_2",
+    "featured_collection",
+    "why_us",
+    "newsletter"
   ]
 }
