@@ -20,10 +20,32 @@ Laatst bijgewerkt: 26-09-2026. Vink af naarmate stappen worden afgerond.
 
 ## 🔲 Fase 1 — Merknaam definitief maken
 
-- [ ] Domeincheck Voya (.com/.nl/relevante extensies)
-- [ ] Merkencheck NL/BE (BOIP) en internationaal (EUIPO)
-- [ ] Besluit: Voya definitief, of overstappen naar alternatief (Stowe, Departure Co., Wayfare, Enroute)
-- [ ] Domein + social handles reserveren
+**Status:** nog geen enkele naam definitief gekozen. Kandidaten uit `Merkstrategie...md`: Voya, Stowe, Departure Co., Wayfare Co., Enroute. "Voya" wordt tot dusver alleen als werktitel/placeholder gebruikt in documentatie.
+
+### 1.1 Vooronderzoek per kandidaat
+- [ ] Domeincheck **Voya** (.com, .nl, .co, relevante extensies)
+- [ ] Domeincheck **Stowe**
+- [ ] Domeincheck **Departure Co.**
+- [ ] Domeincheck **Wayfare Co.**
+- [ ] Domeincheck **Enroute**
+- [ ] Social media handles checken (Instagram, TikTok, Pinterest) per kandidaat die een vrij domein heeft
+
+### 1.2 Juridische check (alleen voor kandidaten met vrij domein)
+- [ ] Merkencheck Benelux (BOIP-register) op woord- en beeldmerk
+- [ ] Merkencheck EU (EUIPO) — relevant omdat internationaal wordt gelanceerd
+- [ ] Merkencheck VS (USPTO) — relevant bij verkoop aan Engelstalige markten
+- [ ] Check op bestaande, verwarrend soortgelijke merken in de reis-/bagagebranche specifiek (niet alleen woordmatch)
+
+### 1.3 Besluitvorming
+- [ ] Shortlist maken van kandidaten die zowel domein als merk vrij hebben
+- [ ] Score per kandidaat op: uitspreekbaarheid (NL + EN), onderscheidend vermogen, geschiktheid voor logo/beeldmerk, beschikbaarheid social handles
+- [ ] Definitieve merknaam kiezen
+- [ ] Domein + social handles direct reserveren na keuze (voorkom dat iemand anders sneller is)
+
+### 1.4 Na definitieve keuze — doorvoeren in bestaande documenten
+- [ ] `Merkstrategie - Reisartikelen Ecommerce.md` bijwerken (werktitel → definitieve naam)
+- [ ] `Landingspagina Structuur.md`, `Productpagina Elementen.md`, `Voorbeeldproducten - Placeholder.md`, `Shopify Abonnement Keuze.md` controleren op naamverwijzingen
+- [ ] KVK-handelsnaam registreren/aanpassen
 
 ## 🔲 Fase 2 — Dev-omgeving inrichten
 
