@@ -1,0 +1,383 @@
+{%- comment -%}
+  Basepacker — Travel specs & airline cabin check
+  Reads product metafields (namespace: basepacker) and checks the bag against
+  airline cabin limits entered as blocks in the theme editor.
+  Metafields: height_cm, width_cm, depth_cm, weight_kg (decimal),
+              capacity_l (integer), material (single line text)
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<style>
+  .bp-specs {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-terracotta-ink: #97502A;
+    --bp-moss: #4F6357;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    display: block;
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-specs__inner { display: grid; gap: 2.4rem; }
+  .bp-specs__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.6rem; }
+  .bp-specs__eyebrow {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bp-moss);
+  }
+  .bp-specs__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-units { display: inline-flex; padding: 0.3rem; border-radius: 99px; background: var(--bp-sand); }
+  .bp-units button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 1.6rem;
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: var(--bp-anthracite);
+    font: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .bp-units button[aria-pressed="true"] { background: var(--bp-deep-blue); color: var(--bp-off-white); }
+  .bp-units button:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  .bp-specs__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: rgba(29, 59, 83, 0.12);
+  }
+  .bp-specs__item { display: grid; gap: 0.4rem; align-content: start; padding: 1.6rem; background: var(--bp-sand); }
+  .bp-specs__item dt { font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+  .bp-specs__item dd {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    line-height: 1.25;
+    color: var(--bp-deep-blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bp-fit { display: grid; gap: 1.2rem; }
+  .bp-fit__title { margin: 0; font-family: var(--font-heading-family); font-size: 2rem; color: var(--bp-deep-blue); }
+  .bp-fit__summary { margin: 0; font-size: 1.5rem; }
+  .bp-fit__summary strong { color: var(--bp-moss); }
+  .bp-fit__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--bp-line); }
+  .bp-fit__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "airline pill" "limit limit" "detail detail";
+    gap: 0.4rem 1.2rem;
+    align-items: center;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--bp-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .bp-fit__airline { grid-area: airline; display: grid; }
+  .bp-fit__airline strong { font-size: 1.6rem; }
+  .bp-fit__airline span, .bp-fit__limit { font-size: 1.3rem; opacity: 0.8; }
+  .bp-fit__limit { grid-area: limit; margin: 0; }
+  .bp-fit__detail { grid-area: detail; margin: 0; font-size: 1.3rem; }
+  .bp-fit__row--no .bp-fit__detail { color: var(--bp-terracotta-ink); }
+  .bp-pill {
+    grid-area: pill;
+    padding: 0.5rem 1.2rem;
+    border-radius: 99px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .bp-pill--ok { background: rgba(79, 99, 87, 0.14); color: var(--bp-moss); }
+  .bp-pill--no { background: rgba(201, 123, 74, 0.16); color: var(--bp-terracotta-ink); }
+  .bp-fit__note { margin: 0; font-size: 1.2rem; opacity: 0.7; }
+
+  @media screen and (min-width: 750px) {
+    .bp-specs__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .bp-specs__item { padding: 2rem; }
+    .bp-fit__row {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
+      grid-template-areas: "airline limit detail pill";
+    }
+  }
+</style>
+
+{%- liquid
+  assign mf = product.metafields.basepacker
+  assign h = mf.height_cm.value
+  assign w = mf.width_cm.value
+  assign d = mf.depth_cm.value
+  assign kg = mf.weight_kg.value
+  assign liters = mf.capacity_l.value
+  assign material = mf.material.value
+
+  assign has_dims = false
+  if h != blank and w != blank and d != blank
+    assign has_dims = true
+  endif
+
+  assign has_any = has_dims
+  if kg != blank or liters != blank or material != blank
+    assign has_any = true
+  endif
+
+  assign default_unit = 'metric'
+  assign country = localization.country.iso_code
+  if country == 'US' or country == 'LR' or country == 'MM'
+    assign default_unit = 'imperial'
+  endif
+-%}
+
+{%- if has_any -%}
+  <bp-specs class="bp-specs section-{{ section.id }}-padding" data-default-unit="{{ default_unit }}">
+    <div class="page-width bp-specs__inner">
+      <div class="bp-specs__head">
+        <div>
+          {%- if section.settings.eyebrow != blank -%}
+            <p class="bp-specs__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+          {%- endif -%}
+          <h2 class="bp-specs__title">{{ section.settings.heading | escape }}</h2>
+        </div>
+        {%- if section.settings.show_unit_toggle -%}
+          <div class="bp-units" role="group" aria-label="Units">
+            <button type="button" data-unit="metric" aria-pressed="true">cm / kg</button>
+            <button type="button" data-unit="imperial" aria-pressed="false">in / lb</button>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <dl class="bp-specs__grid">
+        {%- if has_dims -%}
+          <div class="bp-specs__item">
+            <dt>Size (H × W × D)</dt>
+            <dd>
+              <span data-cm="{{ h }}">{{ h }}</span> × <span data-cm="{{ w }}">{{ w }}</span> ×
+              <span data-cm="{{ d }}">{{ d }}</span> <span data-len-unit>cm</span>
+            </dd>
+          </div>
+        {%- endif -%}
+        {%- if kg != blank -%}
+          <div class="bp-specs__item">
+            <dt>Weight (empty)</dt>
+            <dd><span data-kg="{{ kg }}">{{ kg }}</span> <span data-wt-unit>kg</span></dd>
+          </div>
+        {%- endif -%}
+        {%- if liters != blank -%}
+          <div class="bp-specs__item">
+            <dt>Capacity</dt>
+            <dd>{{ liters }} L</dd>
+          </div>
+        {%- endif -%}
+        {%- if material != blank -%}
+          <div class="bp-specs__item">
+            <dt>Material</dt>
+            <dd>{{ material | escape }}</dd>
+          </div>
+        {%- endif -%}
+      </dl>
+
+      {%- if has_dims and section.blocks.size > 0 -%}
+        {%- assign fit_count = 0 -%}
+        {%- capture rows -%}
+          {%- for block in section.blocks -%}
+            {%- liquid
+              assign bh = block.settings.max_h
+              assign bw = block.settings.max_w
+              assign bd = block.settings.max_d
+              assign bkg = block.settings.max_kg
+              assign fits = true
+              assign too_heavy = false
+              assign reason = ''
+              assign over = 0
+
+              if h > bh
+                assign fits = false
+                assign reason = 'Height'
+                assign over = h | minus: bh | round: 1
+              elsif w > bw
+                assign fits = false
+                assign reason = 'Width'
+                assign over = w | minus: bw | round: 1
+              elsif d > bd
+                assign fits = false
+                assign reason = 'Depth'
+                assign over = d | minus: bd | round: 1
+              endif
+
+              if bkg > 0 and kg != blank and kg > bkg
+                assign fits = false
+                assign too_heavy = true
+              endif
+
+              if fits
+                assign fit_count = fit_count | plus: 1
+              endif
+            -%}
+            <li class="bp-fit__row bp-fit__row--{% if fits %}ok{% else %}no{% endif %}" {{ block.shopify_attributes }}>
+              <div class="bp-fit__airline">
+                <strong>{{ block.settings.airline | escape }}</strong>
+                <span>{{ block.settings.bag_type | escape }}</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="{{ bh }}">{{ bh }}</span> × <span data-cm="{{ bw }}">{{ bw }}</span> ×
+                <span data-cm="{{ bd }}">{{ bd }}</span> <span data-len-unit>cm</span>
+                {%- if bkg > 0 %} · max <span data-kg="{{ bkg }}">{{ bkg }}</span> <span data-wt-unit>kg</span>{% endif %}
+              </p>
+              <p class="bp-fit__detail">
+                {%- if fits and bkg > 0 and kg != blank -%}
+                  <span data-kg="{{ bkg | minus: kg | round: 1 }}">{{ bkg | minus: kg | round: 1 }}</span>
+                  <span data-wt-unit>kg</span> left to pack
+                {%- elsif fits -%}
+                  No weight limit listed
+                {%- elsif reason != blank -%}
+                  {{ reason }} <span data-cm="{{ over }}">{{ over }}</span> <span data-len-unit>cm</span> over the limit
+                {%- elsif too_heavy -%}
+                  The empty bag is already over the weight limit
+                {%- endif -%}
+              </p>
+              <span class="bp-pill bp-pill--{% if fits %}ok{% else %}no{% endif %}">
+                {%- if fits -%}Fits{%- elsif reason != blank -%}Too big{%- else -%}Too heavy{%- endif -%}
+              </span>
+            </li>
+          {%- endfor -%}
+        {%- endcapture -%}
+
+        <div class="bp-fit">
+          <h3 class="bp-fit__title">{{ section.settings.fit_heading | escape }}</h3>
+          <p class="bp-fit__summary">
+            <strong>Fits {{ fit_count }} of {{ section.blocks.size }}</strong> cabin allowances below.
+          </p>
+          <ul class="bp-fit__list">{{ rows }}</ul>
+          {%- if section.settings.note != blank -%}
+            <p class="bp-fit__note">{{ section.settings.note | escape }}</p>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </bp-specs>
+{%- elsif request.design_mode -%}
+  <div class="page-width" style="padding:2rem 0;opacity:.7">
+    Travel specs: this product has no basepacker.* metafields filled in yet.
+  </div>
+{%- endif -%}
+
+<script>
+  if (!customElements.get('bp-specs')) {
+    customElements.define(
+      'bp-specs',
+      class BpSpecs extends HTMLElement {
+        connectedCallback() {
+          let unit = this.dataset.defaultUnit || 'metric';
+          try {
+            unit = localStorage.getItem('bp-unit') || unit;
+          } catch (e) {}
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.addEventListener('click', () => this.setUnit(btn.dataset.unit, true))
+          );
+          this.setUnit(unit, false);
+        }
+
+        setUnit(unit, save) {
+          const imperial = unit === 'imperial';
+          const fmt = (n) => String(Math.round(n * 10) / 10);
+          this.querySelectorAll('[data-cm]').forEach((el) => {
+            const cm = parseFloat(el.dataset.cm);
+            el.textContent = fmt(imperial ? cm / 2.54 : cm);
+          });
+          this.querySelectorAll('[data-kg]').forEach((el) => {
+            const kg = parseFloat(el.dataset.kg);
+            el.textContent = fmt(imperial ? kg * 2.20462 : kg);
+          });
+          this.querySelectorAll('[data-len-unit]').forEach((el) => (el.textContent = imperial ? 'in' : 'cm'));
+          this.querySelectorAll('[data-wt-unit]').forEach((el) => (el.textContent = imperial ? 'lb' : 'kg'));
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.setAttribute('aria-pressed', String(btn.dataset.unit === unit))
+          );
+          if (save) {
+            try {
+              localStorage.setItem('bp-unit', unit);
+            } catch (e) {}
+          }
+        }
+      }
+    );
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Travel specs & fit",
+  "tag": "section",
+  "class": "section",
+  "enabled_on": { "templates": ["product"] },
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Specs & fit" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Will it fit in the cabin?" },
+    { "type": "text", "id": "fit_heading", "label": "Airline check heading", "default": "Airline cabin check" },
+    { "type": "checkbox", "id": "show_unit_toggle", "label": "Show cm/in toggle", "default": true },
+    {
+      "type": "text",
+      "id": "note",
+      "label": "Disclaimer",
+      "default": "Limits checked September 2026. Airlines change their rules, so confirm with your airline before you fly."
+    },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 36 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 36 }
+  ],
+  "blocks": [
+    {
+      "type": "airline",
+      "name": "Airline allowance",
+      "settings": [
+        { "type": "text", "id": "airline", "label": "Airline", "default": "Airline" },
+        { "type": "text", "id": "bag_type", "label": "Bag type", "default": "Cabin bag" },
+        { "type": "number", "id": "max_h", "label": "Max height (cm)", "default": 55 },
+        { "type": "number", "id": "max_w", "label": "Max width (cm)", "default": 40 },
+        { "type": "number", "id": "max_d", "label": "Max depth (cm)", "default": 20 },
+        { "type": "number", "id": "max_kg", "label": "Max weight (kg)", "info": "Use 0 when the airline sets no weight limit", "default": 10 }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Travel specs & fit",
+      "blocks": [
+        { "type": "airline", "settings": { "airline": "Ryanair", "bag_type": "Priority cabin bag", "max_h": 55, "max_w": 40, "max_d": 20, "max_kg": 10 } },
+        { "type": "airline", "settings": { "airline": "Ryanair", "bag_type": "Free under-seat bag", "max_h": 40, "max_w": 30, "max_d": 20, "max_kg": 0 } },
+        { "type": "airline", "settings": { "airline": "easyJet", "bag_type": "Large cabin bag", "max_h": 56, "max_w": 45, "max_d": 25, "max_kg": 15 } },
+        { "type": "airline", "settings": { "airline": "KLM", "bag_type": "Cabin bag", "max_h": 55, "max_w": 35, "max_d": 25, "max_kg": 12 } },
+        { "type": "airline", "settings": { "airline": "British Airways", "bag_type": "Cabin bag", "max_h": 56, "max_w": 45, "max_d": 25, "max_kg": 23 } },
+        { "type": "airline", "settings": { "airline": "Lufthansa", "bag_type": "Cabin bag", "max_h": 55, "max_w": 40, "max_d": 23, "max_kg": 8 } }
+      ]
+    }
+  ]
+}
+{% endschema %}

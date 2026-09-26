@@ -1,0 +1,576 @@
+<title>Basepacker Travel Specs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Inter:wght@400;600&display=swap">
+<style>
+  /* Mimics Dawn's base: 62.5% root so 1rem = 10px, theme font variables, page-width */
+  html { font-size: 62.5%; }
+  body {
+    margin: 0;
+    background: #FAF8F4;
+    color: #2B2B2B;
+    font-family: var(--font-body-family);
+    font-size: 1.5rem;
+    line-height: 1.6;
+    --font-heading-family: 'Fraunces', Georgia, serif;
+    --font-body-family: 'Inter', system-ui, sans-serif;
+  }
+  .page-width { max-width: 120rem; margin: 0 auto; padding: 0 1.6rem; }
+  @media (min-width: 750px) { .page-width { padding: 0 5rem; } }
+  .pv-bar { background: #1D3B53; color: #FAF8F4; padding-block: 1.2rem; }
+  .pv-bar .page-width { display: flex; flex-wrap: wrap; gap: 0.8rem 1.6rem; align-items: center; }
+  .pv-bar p { margin: 0; font-size: 1.3rem; opacity: 0.85; flex: 1 1 24rem; }
+  .pv-tabs { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .pv-tabs button {
+    min-height: 44px; padding: 0 1.4rem; border-radius: 99px; cursor: pointer;
+    border: 1px solid rgba(250, 248, 244, 0.4); background: transparent; color: #FAF8F4; font: inherit; font-size: 1.4rem;
+  }
+  .pv-tabs button[aria-selected="true"] { background: #E8DCC8; color: #1D3B53; border-color: #E8DCC8; }
+  .pv-tabs button:focus-visible { outline: 2px solid #E8DCC8; outline-offset: 2px; }
+</style>
+<div class="pv-bar">
+  <div class="page-width">
+    <p>Section preview with placeholder data. Choose a product to see the metafields change the result.</p>
+    <div class="pv-tabs" role="tablist">
+      <button type="button" role="tab" id="pv-tab-0" aria-selected="true" data-panel="0">The Carry-On Companion</button><button type="button" role="tab" id="pv-tab-1" aria-selected="false" data-panel="1">The Everyday Explorer Backpack</button>
+    </div>
+  </div>
+</div>
+<div data-pv-panel="0"><style>
+  .section-preview-0-padding {
+    padding-top: 27px;
+    padding-bottom: 27px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-preview-0-padding {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+  }
+</style>
+
+<style>
+  .bp-specs {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-terracotta-ink: #97502A;
+    --bp-moss: #4F6357;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    display: block;
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-specs__inner { display: grid; gap: 2.4rem; }
+  .bp-specs__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.6rem; }
+  .bp-specs__eyebrow {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bp-moss);
+  }
+  .bp-specs__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-units { display: inline-flex; padding: 0.3rem; border-radius: 99px; background: var(--bp-sand); }
+  .bp-units button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 1.6rem;
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: var(--bp-anthracite);
+    font: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .bp-units button[aria-pressed="true"] { background: var(--bp-deep-blue); color: var(--bp-off-white); }
+  .bp-units button:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  .bp-specs__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: rgba(29, 59, 83, 0.12);
+  }
+  .bp-specs__item { display: grid; gap: 0.4rem; align-content: start; padding: 1.6rem; background: var(--bp-sand); }
+  .bp-specs__item dt { font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+  .bp-specs__item dd {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    line-height: 1.25;
+    color: var(--bp-deep-blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bp-fit { display: grid; gap: 1.2rem; }
+  .bp-fit__title { margin: 0; font-family: var(--font-heading-family); font-size: 2rem; color: var(--bp-deep-blue); }
+  .bp-fit__summary { margin: 0; font-size: 1.5rem; }
+  .bp-fit__summary strong { color: var(--bp-moss); }
+  .bp-fit__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--bp-line); }
+  .bp-fit__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "airline pill" "limit limit" "detail detail";
+    gap: 0.4rem 1.2rem;
+    align-items: center;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--bp-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .bp-fit__airline { grid-area: airline; display: grid; }
+  .bp-fit__airline strong { font-size: 1.6rem; }
+  .bp-fit__airline span, .bp-fit__limit { font-size: 1.3rem; opacity: 0.8; }
+  .bp-fit__limit { grid-area: limit; margin: 0; }
+  .bp-fit__detail { grid-area: detail; margin: 0; font-size: 1.3rem; }
+  .bp-fit__row--no .bp-fit__detail { color: var(--bp-terracotta-ink); }
+  .bp-pill {
+    grid-area: pill;
+    padding: 0.5rem 1.2rem;
+    border-radius: 99px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .bp-pill--ok { background: rgba(79, 99, 87, 0.14); color: var(--bp-moss); }
+  .bp-pill--no { background: rgba(201, 123, 74, 0.16); color: var(--bp-terracotta-ink); }
+  .bp-fit__note { margin: 0; font-size: 1.2rem; opacity: 0.7; }
+
+  @media screen and (min-width: 750px) {
+    .bp-specs__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .bp-specs__item { padding: 2rem; }
+    .bp-fit__row {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
+      grid-template-areas: "airline limit detail pill";
+    }
+  }
+</style><bp-specs class="bp-specs section-preview-0-padding" data-default-unit="metric">
+    <div class="page-width bp-specs__inner">
+      <div class="bp-specs__head">
+        <div><p class="bp-specs__eyebrow">Specs &amp; fit</p><h2 class="bp-specs__title">Will it fit in the cabin?</h2>
+        </div><div class="bp-units" role="group" aria-label="Units">
+            <button type="button" data-unit="metric" aria-pressed="true">cm / kg</button>
+            <button type="button" data-unit="imperial" aria-pressed="false">in / lb</button>
+          </div></div>
+
+      <dl class="bp-specs__grid"><div class="bp-specs__item">
+            <dt>Size (H × W × D)</dt>
+            <dd>
+              <span data-cm="55">55</span> × <span data-cm="40">40</span> ×
+              <span data-cm="20">20</span> <span data-len-unit>cm</span>
+            </dd>
+          </div><div class="bp-specs__item">
+            <dt>Weight (empty)</dt>
+            <dd><span data-kg="2.3">2.3</span> <span data-wt-unit>kg</span></dd>
+          </div><div class="bp-specs__item">
+            <dt>Capacity</dt>
+            <dd>40 L</dd>
+          </div><div class="bp-specs__item">
+            <dt>Material</dt>
+            <dd>Polycarbonate shell</dd>
+          </div></dl><div class="bp-fit">
+          <h3 class="bp-fit__title">Airline cabin check</h3>
+          <p class="bp-fit__summary">
+            <strong>Fits 4 of 6</strong> cabin allowances below.
+          </p>
+          <ul class="bp-fit__list"><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>Ryanair</strong>
+                <span>Priority cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="55">55</span> × <span data-cm="40">40</span> ×
+                <span data-cm="20">20</span> <span data-len-unit>cm</span> · max <span data-kg="10">10</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="7.7">7.7</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--no" >
+              <div class="bp-fit__airline">
+                <strong>Ryanair</strong>
+                <span>Free under-seat bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="40">40</span> × <span data-cm="30">30</span> ×
+                <span data-cm="20">20</span> <span data-len-unit>cm</span>
+              </p>
+              <p class="bp-fit__detail">Height <span data-cm="15">15</span> <span data-len-unit>cm</span> over the limit</p>
+              <span class="bp-pill bp-pill--no">Too big</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>easyJet</strong>
+                <span>Large cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="56">56</span> × <span data-cm="45">45</span> ×
+                <span data-cm="25">25</span> <span data-len-unit>cm</span> · max <span data-kg="15">15</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="12.7">12.7</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--no" >
+              <div class="bp-fit__airline">
+                <strong>KLM</strong>
+                <span>Cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="55">55</span> × <span data-cm="35">35</span> ×
+                <span data-cm="25">25</span> <span data-len-unit>cm</span> · max <span data-kg="12">12</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail">Width <span data-cm="5">5</span> <span data-len-unit>cm</span> over the limit</p>
+              <span class="bp-pill bp-pill--no">Too big</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>British Airways</strong>
+                <span>Cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="56">56</span> × <span data-cm="45">45</span> ×
+                <span data-cm="25">25</span> <span data-len-unit>cm</span> · max <span data-kg="23">23</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="20.7">20.7</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>Lufthansa</strong>
+                <span>Cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="55">55</span> × <span data-cm="40">40</span> ×
+                <span data-cm="23">23</span> <span data-len-unit>cm</span> · max <span data-kg="8">8</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="5.7">5.7</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li></ul><p class="bp-fit__note">Limits checked September 2026. Airlines change their rules, so confirm with your airline before you fly.</p></div></div>
+  </bp-specs><script>
+  if (!customElements.get('bp-specs')) {
+    customElements.define(
+      'bp-specs',
+      class BpSpecs extends HTMLElement {
+        connectedCallback() {
+          let unit = this.dataset.defaultUnit || 'metric';
+          try {
+            unit = localStorage.getItem('bp-unit') || unit;
+          } catch (e) {}
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.addEventListener('click', () => this.setUnit(btn.dataset.unit, true))
+          );
+          this.setUnit(unit, false);
+        }
+
+        setUnit(unit, save) {
+          const imperial = unit === 'imperial';
+          const fmt = (n) => String(Math.round(n * 10) / 10);
+          this.querySelectorAll('[data-cm]').forEach((el) => {
+            const cm = parseFloat(el.dataset.cm);
+            el.textContent = fmt(imperial ? cm / 2.54 : cm);
+          });
+          this.querySelectorAll('[data-kg]').forEach((el) => {
+            const kg = parseFloat(el.dataset.kg);
+            el.textContent = fmt(imperial ? kg * 2.20462 : kg);
+          });
+          this.querySelectorAll('[data-len-unit]').forEach((el) => (el.textContent = imperial ? 'in' : 'cm'));
+          this.querySelectorAll('[data-wt-unit]').forEach((el) => (el.textContent = imperial ? 'lb' : 'kg'));
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.setAttribute('aria-pressed', String(btn.dataset.unit === unit))
+          );
+          if (save) {
+            try {
+              localStorage.setItem('bp-unit', unit);
+            } catch (e) {}
+          }
+        }
+      }
+    );
+  }
+</script>
+
+
+</div>
+<div data-pv-panel="1" hidden><style>
+  .section-preview-1-padding {
+    padding-top: 27px;
+    padding-bottom: 27px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-preview-1-padding {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+  }
+</style>
+
+<style>
+  .bp-specs {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-terracotta-ink: #97502A;
+    --bp-moss: #4F6357;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    display: block;
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-specs__inner { display: grid; gap: 2.4rem; }
+  .bp-specs__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.6rem; }
+  .bp-specs__eyebrow {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bp-moss);
+  }
+  .bp-specs__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-units { display: inline-flex; padding: 0.3rem; border-radius: 99px; background: var(--bp-sand); }
+  .bp-units button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 1.6rem;
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: var(--bp-anthracite);
+    font: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .bp-units button[aria-pressed="true"] { background: var(--bp-deep-blue); color: var(--bp-off-white); }
+  .bp-units button:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  .bp-specs__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    border-radius: 1.2rem;
+    overflow: hidden;
+    background: rgba(29, 59, 83, 0.12);
+  }
+  .bp-specs__item { display: grid; gap: 0.4rem; align-content: start; padding: 1.6rem; background: var(--bp-sand); }
+  .bp-specs__item dt { font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+  .bp-specs__item dd {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    line-height: 1.25;
+    color: var(--bp-deep-blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bp-fit { display: grid; gap: 1.2rem; }
+  .bp-fit__title { margin: 0; font-family: var(--font-heading-family); font-size: 2rem; color: var(--bp-deep-blue); }
+  .bp-fit__summary { margin: 0; font-size: 1.5rem; }
+  .bp-fit__summary strong { color: var(--bp-moss); }
+  .bp-fit__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--bp-line); }
+  .bp-fit__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "airline pill" "limit limit" "detail detail";
+    gap: 0.4rem 1.2rem;
+    align-items: center;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--bp-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .bp-fit__airline { grid-area: airline; display: grid; }
+  .bp-fit__airline strong { font-size: 1.6rem; }
+  .bp-fit__airline span, .bp-fit__limit { font-size: 1.3rem; opacity: 0.8; }
+  .bp-fit__limit { grid-area: limit; margin: 0; }
+  .bp-fit__detail { grid-area: detail; margin: 0; font-size: 1.3rem; }
+  .bp-fit__row--no .bp-fit__detail { color: var(--bp-terracotta-ink); }
+  .bp-pill {
+    grid-area: pill;
+    padding: 0.5rem 1.2rem;
+    border-radius: 99px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .bp-pill--ok { background: rgba(79, 99, 87, 0.14); color: var(--bp-moss); }
+  .bp-pill--no { background: rgba(201, 123, 74, 0.16); color: var(--bp-terracotta-ink); }
+  .bp-fit__note { margin: 0; font-size: 1.2rem; opacity: 0.7; }
+
+  @media screen and (min-width: 750px) {
+    .bp-specs__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .bp-specs__item { padding: 2rem; }
+    .bp-fit__row {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
+      grid-template-areas: "airline limit detail pill";
+    }
+  }
+</style><bp-specs class="bp-specs section-preview-1-padding" data-default-unit="metric">
+    <div class="page-width bp-specs__inner">
+      <div class="bp-specs__head">
+        <div><p class="bp-specs__eyebrow">Specs &amp; fit</p><h2 class="bp-specs__title">Will it fit in the cabin?</h2>
+        </div><div class="bp-units" role="group" aria-label="Units">
+            <button type="button" data-unit="metric" aria-pressed="true">cm / kg</button>
+            <button type="button" data-unit="imperial" aria-pressed="false">in / lb</button>
+          </div></div>
+
+      <dl class="bp-specs__grid"><div class="bp-specs__item">
+            <dt>Size (H × W × D)</dt>
+            <dd>
+              <span data-cm="45">45</span> × <span data-cm="30">30</span> ×
+              <span data-cm="18">18</span> <span data-len-unit>cm</span>
+            </dd>
+          </div><div class="bp-specs__item">
+            <dt>Weight (empty)</dt>
+            <dd><span data-kg="0.9">0.9</span> <span data-wt-unit>kg</span></dd>
+          </div><div class="bp-specs__item">
+            <dt>Capacity</dt>
+            <dd>25 L</dd>
+          </div><div class="bp-specs__item">
+            <dt>Material</dt>
+            <dd>Ripstop nylon</dd>
+          </div></dl><div class="bp-fit">
+          <h3 class="bp-fit__title">Airline cabin check</h3>
+          <p class="bp-fit__summary">
+            <strong>Fits 5 of 6</strong> cabin allowances below.
+          </p>
+          <ul class="bp-fit__list"><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>Ryanair</strong>
+                <span>Priority cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="55">55</span> × <span data-cm="40">40</span> ×
+                <span data-cm="20">20</span> <span data-len-unit>cm</span> · max <span data-kg="10">10</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="9.1">9.1</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--no" >
+              <div class="bp-fit__airline">
+                <strong>Ryanair</strong>
+                <span>Free under-seat bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="40">40</span> × <span data-cm="30">30</span> ×
+                <span data-cm="20">20</span> <span data-len-unit>cm</span>
+              </p>
+              <p class="bp-fit__detail">Height <span data-cm="5">5</span> <span data-len-unit>cm</span> over the limit</p>
+              <span class="bp-pill bp-pill--no">Too big</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>easyJet</strong>
+                <span>Large cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="56">56</span> × <span data-cm="45">45</span> ×
+                <span data-cm="25">25</span> <span data-len-unit>cm</span> · max <span data-kg="15">15</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="14.1">14.1</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>KLM</strong>
+                <span>Cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="55">55</span> × <span data-cm="35">35</span> ×
+                <span data-cm="25">25</span> <span data-len-unit>cm</span> · max <span data-kg="12">12</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="11.1">11.1</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>British Airways</strong>
+                <span>Cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="56">56</span> × <span data-cm="45">45</span> ×
+                <span data-cm="25">25</span> <span data-len-unit>cm</span> · max <span data-kg="23">23</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="22.1">22.1</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li><li class="bp-fit__row bp-fit__row--ok" >
+              <div class="bp-fit__airline">
+                <strong>Lufthansa</strong>
+                <span>Cabin bag</span>
+              </div>
+              <p class="bp-fit__limit">
+                Limit <span data-cm="55">55</span> × <span data-cm="40">40</span> ×
+                <span data-cm="23">23</span> <span data-len-unit>cm</span> · max <span data-kg="8">8</span> <span data-wt-unit>kg</span>
+              </p>
+              <p class="bp-fit__detail"><span data-kg="7.1">7.1</span>
+                  <span data-wt-unit>kg</span> left to pack</p>
+              <span class="bp-pill bp-pill--ok">Fits</span>
+            </li></ul><p class="bp-fit__note">Limits checked September 2026. Airlines change their rules, so confirm with your airline before you fly.</p></div></div>
+  </bp-specs><script>
+  if (!customElements.get('bp-specs')) {
+    customElements.define(
+      'bp-specs',
+      class BpSpecs extends HTMLElement {
+        connectedCallback() {
+          let unit = this.dataset.defaultUnit || 'metric';
+          try {
+            unit = localStorage.getItem('bp-unit') || unit;
+          } catch (e) {}
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.addEventListener('click', () => this.setUnit(btn.dataset.unit, true))
+          );
+          this.setUnit(unit, false);
+        }
+
+        setUnit(unit, save) {
+          const imperial = unit === 'imperial';
+          const fmt = (n) => String(Math.round(n * 10) / 10);
+          this.querySelectorAll('[data-cm]').forEach((el) => {
+            const cm = parseFloat(el.dataset.cm);
+            el.textContent = fmt(imperial ? cm / 2.54 : cm);
+          });
+          this.querySelectorAll('[data-kg]').forEach((el) => {
+            const kg = parseFloat(el.dataset.kg);
+            el.textContent = fmt(imperial ? kg * 2.20462 : kg);
+          });
+          this.querySelectorAll('[data-len-unit]').forEach((el) => (el.textContent = imperial ? 'in' : 'cm'));
+          this.querySelectorAll('[data-wt-unit]').forEach((el) => (el.textContent = imperial ? 'lb' : 'kg'));
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.setAttribute('aria-pressed', String(btn.dataset.unit === unit))
+          );
+          if (save) {
+            try {
+              localStorage.setItem('bp-unit', unit);
+            } catch (e) {}
+          }
+        }
+      }
+    );
+  }
+</script>
+
+
+</div>
+<script>
+  document.querySelectorAll('[data-panel]').forEach((btn) => btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-panel]').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));
+    document.querySelectorAll('[data-pv-panel]').forEach((el) => { el.hidden = el.dataset.pvPanel !== btn.dataset.panel; });
+  }));
+</script>
