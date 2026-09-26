@@ -32,7 +32,7 @@
   <div class="page-width">
     <p>Section preview with placeholder data. Choose a product to see the metafields change the result.</p>
     <div class="pv-tabs" role="tablist">
-      <button type="button" role="tab" id="pv-tab-0" aria-selected="true" data-panel="0">The Carry-On Companion</button><button type="button" role="tab" id="pv-tab-1" aria-selected="false" data-panel="1">The Everyday Explorer Backpack</button>
+      <button type="button" role="tab" id="pv-tab-0" aria-selected="true" data-panel="0">The Carry-On Companion</button><button type="button" role="tab" id="pv-tab-1" aria-selected="false" data-panel="1">The Everyday Explorer Backpack</button><button type="button" role="tab" id="pv-tab-2" aria-selected="false" data-panel="2">The Family Road Trip Organizer Set</button>
     </div>
   </div>
 </div>
@@ -222,14 +222,18 @@
 
   .bp-specs__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 0.8rem;
     margin: 0;
-    border-radius: 1.2rem;
-    overflow: hidden;
-    background: rgba(29, 59, 83, 0.12);
   }
-  .bp-specs__item { display: grid; gap: 0.4rem; align-content: start; padding: 1.6rem; background: var(--bp-sand); }
+  .bp-specs__item {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-sand);
+  }
   .bp-specs__item dt { font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
   .bp-specs__item dd {
     margin: 0;
@@ -274,7 +278,6 @@
   .bp-fit__note { margin: 0; font-size: 1.2rem; opacity: 0.7; }
 
   @media screen and (min-width: 750px) {
-    .bp-specs__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .bp-specs__item { padding: 2rem; }
     .bp-fit__row {
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
@@ -425,7 +428,129 @@
 </script>
 
 
-</div>
+<style>
+  .section-bp-faq-0-padding {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-faq-0-padding {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+</style>
+
+<style>
+  .bp-faq {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-faq__inner { display: grid; gap: 2.4rem; }
+  .bp-faq__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-faq__intro { margin: 0.8rem 0 0; font-size: 1.5rem; line-height: 1.6; max-width: 38ch; }
+  .bp-faq__contact { margin-top: 1.6rem; font-size: 1.4rem; }
+  .bp-faq__contact p { margin: 0; }
+  .bp-faq__contact a { color: var(--bp-deep-blue); text-underline-offset: 0.3rem; }
+  .bp-faq__list { border-top: 1px solid var(--bp-line); }
+  .bp-faq__item { border-bottom: 1px solid var(--bp-line); }
+  .bp-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    min-height: 5.6rem;
+    padding: 1.2rem 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bp-deep-blue);
+    cursor: pointer;
+    list-style: none;
+  }
+  .bp-faq__item summary::-webkit-details-marker { display: none; }
+  .bp-faq__item summary:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+  .bp-faq__item summary::after {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+    border-right: 2px solid var(--bp-terracotta);
+    border-bottom: 2px solid var(--bp-terracotta);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  .bp-faq__item[open] summary::after { transform: translateY(25%) rotate(-135deg); }
+  .bp-faq__answer { padding: 0 0 1.6rem; font-size: 1.5rem; line-height: 1.65; max-width: 65ch; }
+  .bp-faq__answer > :first-child { margin-top: 0; }
+  .bp-faq__answer > :last-child { margin-bottom: 0; }
+  .bp-faq__answer a { color: var(--bp-deep-blue); }
+  @media (prefers-reduced-motion: reduce) {
+    .bp-faq__item summary::after { transition: none; }
+  }
+  @media screen and (min-width: 990px) {
+    .bp-faq__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 6rem; align-items: start; }
+  }
+</style><div class="bp-faq section-bp-faq-0-padding">
+    <div class="page-width bp-faq__inner">
+      <div>
+        <h2 class="bp-faq__title">Questions before you pack?</h2><p class="bp-faq__intro">Straight answers about size, materials and returns.</p></div>
+      <div class="bp-faq__list"><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-0"
+        open
+        
+      >
+        <summary>What are the exact dimensions?</summary>
+        <div class="bp-faq__answer rte"><p>It measures 55 × 40 × 20 cm and weighs 2.3 kg empty. The airline cabin check on this page shows which carriers accept it.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-0"
+        
+        
+      >
+        <summary>Will it fit as cabin baggage on every airline?</summary>
+        <div class="bp-faq__answer rte"><p>Not on every airline, because cabin limits differ. At 55 × 40 × 20 cm it fits most major European carriers. Check the airline table on this page for your flight, and confirm with your airline before you fly.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-0"
+        
+        
+      >
+        <summary>What is it made of?</summary>
+        <div class="bp-faq__answer rte"><p>Polycarbonate shell. We name the exact material so you know what you're buying.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-0"
+        
+        
+      >
+        <summary>Will it last more than one trip?</summary>
+        <div class="bp-faq__answer rte"><p>It's built for repeated trips, not a single holiday. Every product comes with the 2-year legal warranty that applies in the EU.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-0"
+        
+        
+      >
+        <summary>Can I return it?</summary>
+        <div class="bp-faq__answer rte"><p>Yes, within 14 days of delivery. Our returns policy explains how it works.</p></div>
+      </details></div>
+    </div>
+  </div></div>
 <div data-pv-panel="1" hidden><style>
   .section-bp-usp-bar-1-padding {
     padding-top: 18px;
@@ -612,14 +737,18 @@
 
   .bp-specs__grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 0.8rem;
     margin: 0;
-    border-radius: 1.2rem;
-    overflow: hidden;
-    background: rgba(29, 59, 83, 0.12);
   }
-  .bp-specs__item { display: grid; gap: 0.4rem; align-content: start; padding: 1.6rem; background: var(--bp-sand); }
+  .bp-specs__item {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-sand);
+  }
   .bp-specs__item dt { font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
   .bp-specs__item dd {
     margin: 0;
@@ -664,7 +793,6 @@
   .bp-fit__note { margin: 0; font-size: 1.2rem; opacity: 0.7; }
 
   @media screen and (min-width: 750px) {
-    .bp-specs__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .bp-specs__item { padding: 2rem; }
     .bp-fit__row {
       grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
@@ -816,7 +944,565 @@
 </script>
 
 
-</div>
+<style>
+  .section-bp-faq-1-padding {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-faq-1-padding {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+</style>
+
+<style>
+  .bp-faq {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-faq__inner { display: grid; gap: 2.4rem; }
+  .bp-faq__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-faq__intro { margin: 0.8rem 0 0; font-size: 1.5rem; line-height: 1.6; max-width: 38ch; }
+  .bp-faq__contact { margin-top: 1.6rem; font-size: 1.4rem; }
+  .bp-faq__contact p { margin: 0; }
+  .bp-faq__contact a { color: var(--bp-deep-blue); text-underline-offset: 0.3rem; }
+  .bp-faq__list { border-top: 1px solid var(--bp-line); }
+  .bp-faq__item { border-bottom: 1px solid var(--bp-line); }
+  .bp-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    min-height: 5.6rem;
+    padding: 1.2rem 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bp-deep-blue);
+    cursor: pointer;
+    list-style: none;
+  }
+  .bp-faq__item summary::-webkit-details-marker { display: none; }
+  .bp-faq__item summary:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+  .bp-faq__item summary::after {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+    border-right: 2px solid var(--bp-terracotta);
+    border-bottom: 2px solid var(--bp-terracotta);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  .bp-faq__item[open] summary::after { transform: translateY(25%) rotate(-135deg); }
+  .bp-faq__answer { padding: 0 0 1.6rem; font-size: 1.5rem; line-height: 1.65; max-width: 65ch; }
+  .bp-faq__answer > :first-child { margin-top: 0; }
+  .bp-faq__answer > :last-child { margin-bottom: 0; }
+  .bp-faq__answer a { color: var(--bp-deep-blue); }
+  @media (prefers-reduced-motion: reduce) {
+    .bp-faq__item summary::after { transition: none; }
+  }
+  @media screen and (min-width: 990px) {
+    .bp-faq__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 6rem; align-items: start; }
+  }
+</style><div class="bp-faq section-bp-faq-1-padding">
+    <div class="page-width bp-faq__inner">
+      <div>
+        <h2 class="bp-faq__title">Questions before you pack?</h2><p class="bp-faq__intro">Straight answers about size, materials and returns.</p></div>
+      <div class="bp-faq__list"><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-1"
+        open
+        
+      >
+        <summary>What are the exact dimensions?</summary>
+        <div class="bp-faq__answer rte"><p>It measures 45 × 30 × 18 cm and weighs 0.9 kg empty. The airline cabin check on this page shows which carriers accept it.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-1"
+        
+        
+      >
+        <summary>Will it fit as cabin baggage on every airline?</summary>
+        <div class="bp-faq__answer rte"><p>Not on every airline, because cabin limits differ. At 45 × 30 × 18 cm it fits most major European carriers. Check the airline table on this page for your flight, and confirm with your airline before you fly.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-1"
+        
+        
+      >
+        <summary>What is it made of?</summary>
+        <div class="bp-faq__answer rte"><p>Ripstop nylon. We name the exact material so you know what you're buying.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-1"
+        
+        
+      >
+        <summary>Is it waterproof?</summary>
+        <div class="bp-faq__answer rte"><p>It's water-repellent, not waterproof. It keeps out light rain and splashes, but don't submerge it or leave it out in heavy rain.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-1"
+        
+        
+      >
+        <summary>Will it last more than one trip?</summary>
+        <div class="bp-faq__answer rte"><p>It's built for repeated trips, not a single holiday. Every product comes with the 2-year legal warranty that applies in the EU.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-1"
+        
+        
+      >
+        <summary>Can I return it?</summary>
+        <div class="bp-faq__answer rte"><p>Yes, within 14 days of delivery. Our returns policy explains how it works.</p></div>
+      </details></div>
+    </div>
+  </div></div>
+<div data-pv-panel="2" hidden><style>
+  .section-bp-usp-bar-2-padding {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-usp-bar-2-padding {
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+</style>
+
+<style>
+  .bp-usp {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    display: block;
+    background: var(--bp-usp-bg);
+    color: var(--bp-anthracite);
+  }
+  .bp-usp--sand { --bp-usp-bg: var(--bp-sand); --bp-usp-card: rgba(250, 248, 244, 0.6); }
+  .bp-usp--off-white { --bp-usp-bg: var(--bp-off-white); --bp-usp-card: var(--bp-sand); }
+  .bp-usp__heading {
+    margin: 0 0 1.6rem;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    color: var(--bp-deep-blue);
+  }
+  .bp-usp__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(24rem, 78%);
+    gap: 1.2rem;
+    margin: 0 -1.5rem;
+    padding: 0 1.5rem;
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1.5rem;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .bp-usp__list::-webkit-scrollbar { display: none; }
+  .bp-usp__list[data-more] {
+    -webkit-mask-image: linear-gradient(to right, #000 82%, transparent);
+    mask-image: linear-gradient(to right, #000 82%, transparent);
+  }
+  .bp-usp__item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1.2rem;
+    align-items: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-usp-card);
+    scroll-snap-align: start;
+  }
+  .bp-usp__icon { width: 2.8rem; height: 2.8rem; color: var(--bp-deep-blue); }
+  .bp-usp__text { display: grid; gap: 0.2rem; margin: 0; font-size: 1.4rem; line-height: 1.45; }
+  .bp-usp__text strong { font-size: 1.5rem; color: var(--bp-deep-blue); }
+  .bp-usp__text a { color: inherit; text-underline-offset: 0.3rem; }
+  .bp-usp__text a:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  @media screen and (min-width: 750px) {
+    .bp-usp__list {
+      grid-auto-columns: minmax(0, 1fr);
+      margin: 0;
+      padding: 0;
+      overflow: visible;
+    }
+    .bp-usp__list[data-more] { -webkit-mask-image: none; mask-image: none; }
+  }
+</style><bp-usp class="bp-usp bp-usp--sand section-bp-usp-bar-2-padding">
+    <div class="page-width">
+      <h2 class="bp-usp__heading visually-hidden">Why travel with Basepacker</h2>
+      <ul class="bp-usp__list" role="list"><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 6h11v9H3zM14 9h4l3 3v3h-7z"/><circle cx="7" cy="17" r="1.8"/><circle cx="17" cy="17" r="1.8"/></svg>
+            <p class="bp-usp__text"><strong>Tracked shipping</strong><span>Follow your order from our warehouse to your door.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg>
+            <p class="bp-usp__text"><strong>14-day returns</strong><span>Changed your mind? Send it back within 14 days.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+            <p class="bp-usp__text"><strong>2-year warranty</strong><span>Built for many trips, and covered if it isn&#39;t.</span>
+            </p>
+          </li><li class="bp-usp__item" >
+            <svg class="bp-usp__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            <p class="bp-usp__text"><strong>Secure checkout</strong><span>Pay safely with Shopify Checkout.</span>
+            </p>
+          </li></ul>
+    </div>
+  </bp-usp><script>
+  // Fades the right edge on mobile while more items are hidden off-screen.
+  if (!customElements.get('bp-usp')) {
+    customElements.define(
+      'bp-usp',
+      class BpUsp extends HTMLElement {
+        connectedCallback() {
+          this.list = this.querySelector('.bp-usp__list');
+          if (!this.list) return;
+          this.update = () => {
+            const hidden = this.list.scrollWidth - this.list.clientWidth - this.list.scrollLeft;
+            this.list.toggleAttribute('data-more', hidden > 4);
+          };
+          this.list.addEventListener('scroll', this.update, { passive: true });
+          this.observer = new ResizeObserver(this.update);
+          this.observer.observe(this.list);
+          this.update();
+        }
+
+        disconnectedCallback() {
+          if (this.observer) this.observer.disconnect();
+        }
+      }
+    );
+  }
+</script>
+
+
+<style>
+  .section-bp-travel-specs-2-padding {
+    padding-top: 27px;
+    padding-bottom: 27px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-travel-specs-2-padding {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+  }
+</style>
+
+<style>
+  .bp-specs {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-terracotta-ink: #97502A;
+    --bp-moss: #4F6357;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    display: block;
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-specs__inner { display: grid; gap: 2.4rem; }
+  .bp-specs__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.6rem; }
+  .bp-specs__eyebrow {
+    margin: 0 0 0.6rem;
+    font-size: 1.2rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--bp-moss);
+  }
+  .bp-specs__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-units { display: inline-flex; padding: 0.3rem; border-radius: 99px; background: var(--bp-sand); }
+  .bp-units button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 0 1.6rem;
+    border: 0;
+    border-radius: 99px;
+    background: transparent;
+    color: var(--bp-anthracite);
+    font: inherit;
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .bp-units button[aria-pressed="true"] { background: var(--bp-deep-blue); color: var(--bp-off-white); }
+  .bp-units button:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+
+  .bp-specs__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 0.8rem;
+    margin: 0;
+  }
+  .bp-specs__item {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
+    padding: 1.6rem;
+    border-radius: 1.2rem;
+    background: var(--bp-sand);
+  }
+  .bp-specs__item dt { font-size: 1.2rem; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.75; }
+  .bp-specs__item dd {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: 2rem;
+    line-height: 1.25;
+    color: var(--bp-deep-blue);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .bp-fit { display: grid; gap: 1.2rem; }
+  .bp-fit__title { margin: 0; font-family: var(--font-heading-family); font-size: 2rem; color: var(--bp-deep-blue); }
+  .bp-fit__summary { margin: 0; font-size: 1.5rem; }
+  .bp-fit__summary strong { color: var(--bp-moss); }
+  .bp-fit__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--bp-line); }
+  .bp-fit__row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "airline pill" "limit limit" "detail detail";
+    gap: 0.4rem 1.2rem;
+    align-items: center;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--bp-line);
+    font-variant-numeric: tabular-nums;
+  }
+  .bp-fit__airline { grid-area: airline; display: grid; }
+  .bp-fit__airline strong { font-size: 1.6rem; }
+  .bp-fit__airline span, .bp-fit__limit { font-size: 1.3rem; opacity: 0.8; }
+  .bp-fit__limit { grid-area: limit; margin: 0; }
+  .bp-fit__detail { grid-area: detail; margin: 0; font-size: 1.3rem; }
+  .bp-fit__row--no .bp-fit__detail { color: var(--bp-terracotta-ink); }
+  .bp-pill {
+    grid-area: pill;
+    padding: 0.5rem 1.2rem;
+    border-radius: 99px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .bp-pill--ok { background: rgba(79, 99, 87, 0.14); color: var(--bp-moss); }
+  .bp-pill--no { background: rgba(201, 123, 74, 0.16); color: var(--bp-terracotta-ink); }
+  .bp-fit__note { margin: 0; font-size: 1.2rem; opacity: 0.7; }
+
+  @media screen and (min-width: 750px) {
+    .bp-specs__item { padding: 2rem; }
+    .bp-fit__row {
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.4fr) minmax(0, 1.2fr) auto;
+      grid-template-areas: "airline limit detail pill";
+    }
+  }
+</style><bp-specs class="bp-specs section-bp-travel-specs-2-padding" data-default-unit="metric">
+    <div class="page-width bp-specs__inner">
+      <div class="bp-specs__head">
+        <div><p class="bp-specs__eyebrow">Specs &amp; fit</p><h2 class="bp-specs__title">Will it fit in the cabin?</h2>
+        </div><div class="bp-units" role="group" aria-label="Units">
+            <button type="button" data-unit="metric" aria-pressed="true">cm / kg</button>
+            <button type="button" data-unit="imperial" aria-pressed="false">in / lb</button>
+          </div></div>
+
+      <dl class="bp-specs__grid"><div class="bp-specs__item">
+            <dt>Material</dt>
+            <dd>Water-repellent polyester</dd>
+          </div></dl></div>
+  </bp-specs><script>
+  if (!customElements.get('bp-specs')) {
+    customElements.define(
+      'bp-specs',
+      class BpSpecs extends HTMLElement {
+        connectedCallback() {
+          let unit = this.dataset.defaultUnit || 'metric';
+          try {
+            unit = localStorage.getItem('bp-unit') || unit;
+          } catch (e) {}
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.addEventListener('click', () => this.setUnit(btn.dataset.unit, true))
+          );
+          this.setUnit(unit, false);
+        }
+
+        setUnit(unit, save) {
+          const imperial = unit === 'imperial';
+          const fmt = (n) => String(Math.round(n * 10) / 10);
+          this.querySelectorAll('[data-cm]').forEach((el) => {
+            const cm = parseFloat(el.dataset.cm);
+            el.textContent = fmt(imperial ? cm / 2.54 : cm);
+          });
+          this.querySelectorAll('[data-kg]').forEach((el) => {
+            const kg = parseFloat(el.dataset.kg);
+            el.textContent = fmt(imperial ? kg * 2.20462 : kg);
+          });
+          this.querySelectorAll('[data-len-unit]').forEach((el) => (el.textContent = imperial ? 'in' : 'cm'));
+          this.querySelectorAll('[data-wt-unit]').forEach((el) => (el.textContent = imperial ? 'lb' : 'kg'));
+          this.querySelectorAll('[data-unit]').forEach((btn) =>
+            btn.setAttribute('aria-pressed', String(btn.dataset.unit === unit))
+          );
+          if (save) {
+            try {
+              localStorage.setItem('bp-unit', unit);
+            } catch (e) {}
+          }
+        }
+      }
+    );
+  }
+</script>
+
+
+<style>
+  .section-bp-faq-2-padding {
+    padding-top: 36px;
+    padding-bottom: 36px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-bp-faq-2-padding {
+      padding-top: 48px;
+      padding-bottom: 48px;
+    }
+  }
+</style>
+
+<style>
+  .bp-faq {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-faq__inner { display: grid; gap: 2.4rem; }
+  .bp-faq__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-faq__intro { margin: 0.8rem 0 0; font-size: 1.5rem; line-height: 1.6; max-width: 38ch; }
+  .bp-faq__contact { margin-top: 1.6rem; font-size: 1.4rem; }
+  .bp-faq__contact p { margin: 0; }
+  .bp-faq__contact a { color: var(--bp-deep-blue); text-underline-offset: 0.3rem; }
+  .bp-faq__list { border-top: 1px solid var(--bp-line); }
+  .bp-faq__item { border-bottom: 1px solid var(--bp-line); }
+  .bp-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    min-height: 5.6rem;
+    padding: 1.2rem 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bp-deep-blue);
+    cursor: pointer;
+    list-style: none;
+  }
+  .bp-faq__item summary::-webkit-details-marker { display: none; }
+  .bp-faq__item summary:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+  .bp-faq__item summary::after {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+    border-right: 2px solid var(--bp-terracotta);
+    border-bottom: 2px solid var(--bp-terracotta);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  .bp-faq__item[open] summary::after { transform: translateY(25%) rotate(-135deg); }
+  .bp-faq__answer { padding: 0 0 1.6rem; font-size: 1.5rem; line-height: 1.65; max-width: 65ch; }
+  .bp-faq__answer > :first-child { margin-top: 0; }
+  .bp-faq__answer > :last-child { margin-bottom: 0; }
+  .bp-faq__answer a { color: var(--bp-deep-blue); }
+  @media (prefers-reduced-motion: reduce) {
+    .bp-faq__item summary::after { transition: none; }
+  }
+  @media screen and (min-width: 990px) {
+    .bp-faq__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 6rem; align-items: start; }
+  }
+</style><div class="bp-faq section-bp-faq-2-padding">
+    <div class="page-width bp-faq__inner">
+      <div>
+        <h2 class="bp-faq__title">Questions before you pack?</h2><p class="bp-faq__intro">Straight answers about size, materials and returns.</p></div>
+      <div class="bp-faq__list"><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-2"
+        open
+        
+      >
+        <summary>What is it made of?</summary>
+        <div class="bp-faq__answer rte"><p>Water-repellent polyester. We name the exact material so you know what you're buying.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-2"
+        
+        
+      >
+        <summary>Is it waterproof?</summary>
+        <div class="bp-faq__answer rte"><p>It's water-repellent, not waterproof. It keeps out light rain and splashes, but don't submerge it or leave it out in heavy rain.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-2"
+        
+        
+      >
+        <summary>Is it easy to repack for every trip?</summary>
+        <div class="bp-faq__answer rte"><p>Yes. Every pocket has a fixed job, so repacking follows the same routine each time and nothing gets left behind.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-2"
+        
+        
+      >
+        <summary>Will it last more than one trip?</summary>
+        <div class="bp-faq__answer rte"><p>It's built for repeated trips, not a single holiday. Every product comes with the 2-year legal warranty that applies in the EU.</p></div>
+      </details><details
+        class="bp-faq__item"
+        name="bp-faq-bp-faq-2"
+        
+        
+      >
+        <summary>Can I return it?</summary>
+        <div class="bp-faq__answer rte"><p>Yes, within 14 days of delivery. Our returns policy explains how it works.</p></div>
+      </details></div>
+    </div>
+  </div></div>
 <script>
   document.querySelectorAll('[data-panel]').forEach((btn) => btn.addEventListener('click', () => {
     document.querySelectorAll('[data-panel]').forEach((b) => b.setAttribute('aria-selected', String(b === btn)));

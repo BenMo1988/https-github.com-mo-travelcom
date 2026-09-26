@@ -1,0 +1,296 @@
+{%- comment -%}
+  Basepacker — Product FAQ
+  Questions as blocks. Answers can use [size], [weight], [capacity] and [material],
+  filled from basepacker.* product metafields. A question is hidden when a value
+  it needs is missing, or when its product type filter doesn't match.
+{%- endcomment -%}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<style>
+  .bp-faq {
+    --bp-deep-blue: #1D3B53;
+    --bp-sand: #E8DCC8;
+    --bp-terracotta: #C97B4A;
+    --bp-off-white: #FAF8F4;
+    --bp-anthracite: #2B2B2B;
+    --bp-line: rgba(43, 43, 43, 0.12);
+    background: var(--bp-off-white);
+    color: var(--bp-anthracite);
+  }
+  .bp-faq__inner { display: grid; gap: 2.4rem; }
+  .bp-faq__title {
+    margin: 0;
+    font-family: var(--font-heading-family);
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    color: var(--bp-deep-blue);
+    text-wrap: balance;
+  }
+  .bp-faq__intro { margin: 0.8rem 0 0; font-size: 1.5rem; line-height: 1.6; max-width: 38ch; }
+  .bp-faq__contact { margin-top: 1.6rem; font-size: 1.4rem; }
+  .bp-faq__contact p { margin: 0; }
+  .bp-faq__contact a { color: var(--bp-deep-blue); text-underline-offset: 0.3rem; }
+  .bp-faq__list { border-top: 1px solid var(--bp-line); }
+  .bp-faq__item { border-bottom: 1px solid var(--bp-line); }
+  .bp-faq__item summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.6rem;
+    min-height: 5.6rem;
+    padding: 1.2rem 0;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--bp-deep-blue);
+    cursor: pointer;
+    list-style: none;
+  }
+  .bp-faq__item summary::-webkit-details-marker { display: none; }
+  .bp-faq__item summary:focus-visible { outline: 2px solid var(--bp-deep-blue); outline-offset: 2px; }
+  .bp-faq__item summary::after {
+    content: "";
+    flex: none;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.4rem;
+    border-right: 2px solid var(--bp-terracotta);
+    border-bottom: 2px solid var(--bp-terracotta);
+    transform: translateY(-25%) rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+  .bp-faq__item[open] summary::after { transform: translateY(25%) rotate(-135deg); }
+  .bp-faq__answer { padding: 0 0 1.6rem; font-size: 1.5rem; line-height: 1.65; max-width: 65ch; }
+  .bp-faq__answer > :first-child { margin-top: 0; }
+  .bp-faq__answer > :last-child { margin-bottom: 0; }
+  .bp-faq__answer a { color: var(--bp-deep-blue); }
+  @media (prefers-reduced-motion: reduce) {
+    .bp-faq__item summary::after { transition: none; }
+  }
+  @media screen and (min-width: 990px) {
+    .bp-faq__inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 6rem; align-items: start; }
+  }
+</style>
+
+{%- liquid
+  assign mf = product.metafields.basepacker
+
+  # Decimal metafields print as 55.0; show whole numbers without the .0
+  assign h = mf.height_cm.value
+  assign h_round = h | round
+  if h_round == h
+    assign h = h_round
+  endif
+  assign w = mf.width_cm.value
+  assign w_round = w | round
+  if w_round == w
+    assign w = w_round
+  endif
+  assign d = mf.depth_cm.value
+  assign d_round = d | round
+  if d_round == d
+    assign d = d_round
+  endif
+  assign kg = mf.weight_kg.value
+  assign kg_round = kg | round
+  if kg_round == kg
+    assign kg = kg_round
+  endif
+
+  assign size_str = ''
+  if mf.height_cm.value != blank and mf.width_cm.value != blank and mf.depth_cm.value != blank
+    assign size_str = h | append: ' × ' | append: w | append: ' × ' | append: d | append: ' cm'
+  endif
+  assign weight_str = ''
+  if mf.weight_kg.value != blank
+    assign weight_str = kg | append: ' kg'
+  endif
+  assign capacity_str = ''
+  if mf.capacity_l.value != blank
+    assign capacity_str = mf.capacity_l.value | append: ' litres'
+  endif
+  assign material_str = mf.material.value | default: ''
+  assign product_type = product.type | downcase | strip
+  assign faq_name = 'bp-faq-' | append: section.id
+  assign shown = 0
+-%}
+
+{%- capture items -%}
+  {%- for block in section.blocks -%}
+    {%- liquid
+      assign answer = block.settings.answer
+      assign show = true
+
+      if block.settings.product_types != blank and product != blank
+        assign show = false
+        assign types = block.settings.product_types | split: ','
+        for t in types
+          assign t_clean = t | downcase | strip
+          if t_clean == product_type
+            assign show = true
+          endif
+        endfor
+      endif
+
+      if answer contains '[size]' and size_str == blank
+        assign show = false
+      endif
+      if answer contains '[weight]' and weight_str == blank
+        assign show = false
+      endif
+      if answer contains '[capacity]' and capacity_str == blank
+        assign show = false
+      endif
+      if answer contains '[material]' and material_str == blank
+        assign show = false
+      endif
+    -%}
+    {%- if show and block.settings.question != blank -%}
+      {%- liquid
+        assign shown = shown | plus: 1
+        assign answer = answer | replace: '[size]', size_str | replace: '[weight]', weight_str | replace: '[capacity]', capacity_str | replace: '[material]', material_str
+      -%}
+      <details
+        class="bp-faq__item"
+        {% if section.settings.one_open %}name="{{ faq_name }}"{% endif %}
+        {% if section.settings.open_first and shown == 1 %}open{% endif %}
+        {{ block.shopify_attributes }}
+      >
+        <summary>{{ block.settings.question | escape }}</summary>
+        <div class="bp-faq__answer rte">{{ answer }}</div>
+      </details>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+
+{%- if shown > 0 -%}
+  <div class="bp-faq section-{{ section.id }}-padding">
+    <div class="page-width bp-faq__inner">
+      <div>
+        <h2 class="bp-faq__title">{{ section.settings.heading | escape }}</h2>
+        {%- if section.settings.intro != blank -%}
+          <p class="bp-faq__intro">{{ section.settings.intro | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.contact != blank -%}
+          <div class="bp-faq__contact">{{ section.settings.contact }}</div>
+        {%- endif -%}
+      </div>
+      <div class="bp-faq__list">{{ items }}</div>
+    </div>
+  </div>
+{%- elsif request.design_mode -%}
+  <div class="page-width" style="padding:2rem 0;opacity:.7">
+    FAQ: no questions match this product. Check the product type filters or the metafields used in the answers.
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Product FAQ",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": { "groups": ["header", "footer"] },
+  "settings": [
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Questions before you pack?" },
+    { "type": "text", "id": "intro", "label": "Intro", "default": "Straight answers about size, materials and returns." },
+    { "type": "richtext", "id": "contact", "label": "Contact line", "info": "Optional, e.g. a link to your contact page" },
+    { "type": "checkbox", "id": "open_first", "label": "Open the first question", "default": true },
+    { "type": "checkbox", "id": "one_open", "label": "Keep one question open at a time", "default": true },
+    { "type": "header", "content": "Section padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top padding", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom padding", "default": 48 }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question", "default": "Question" },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "Answer",
+          "info": "Use [size], [weight], [capacity] or [material] to insert the product's metafield values. The question is hidden on products without that value.",
+          "default": "<p>Answer</p>"
+        },
+        {
+          "type": "text",
+          "id": "product_types",
+          "label": "Only show for product types",
+          "info": "Comma-separated, e.g. Suitcase, Backpack. Leave empty to show on every product."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product FAQ",
+      "blocks": [
+        {
+          "type": "question",
+          "settings": {
+            "question": "What are the exact dimensions?",
+            "answer": "<p>It measures [size] and weighs [weight] empty. The airline cabin check on this page shows which carriers accept it.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Will it fit as cabin baggage on every airline?",
+            "answer": "<p>Not on every airline, because cabin limits differ. At [size] it fits most major European carriers. Check the airline table on this page for your flight, and confirm with your airline before you fly.</p>",
+            "product_types": "Suitcase, Backpack"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "What is it made of?",
+            "answer": "<p>[material]. We name the exact material so you know what you're buying.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Is it waterproof?",
+            "answer": "<p>It's water-repellent, not waterproof. It keeps out light rain and splashes, but don't submerge it or leave it out in heavy rain.</p>",
+            "product_types": "Backpack, Crossbody bag, Organizer"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Is it easy to repack for every trip?",
+            "answer": "<p>Yes. Every pocket has a fixed job, so repacking follows the same routine each time and nothing gets left behind.</p>",
+            "product_types": "Organizer"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Will it last more than one trip?",
+            "answer": "<p>It's built for repeated trips, not a single holiday. Every product comes with the 2-year legal warranty that applies in the EU.</p>"
+          }
+        },
+        {
+          "type": "question",
+          "settings": {
+            "question": "Can I return it?",
+            "answer": "<p>Yes, within 14 days of delivery. Our returns policy explains how it works.</p>"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

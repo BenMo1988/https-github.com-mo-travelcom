@@ -8,18 +8,25 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 // Sections in the order they appear on the product page
-const sectionNames = ['bp-usp-bar', 'bp-travel-specs'];
+const sectionNames = ['bp-usp-bar', 'bp-travel-specs', 'bp-faq'];
 const outName = 'bp-travel-specs';
 
-// Placeholder products from "Voorbeeldproducten - Placeholder.md"
+// Placeholder products, same values as shopify/data/placeholder-products.csv
 const products = [
   {
     title: 'The Carry-On Companion',
+    type: 'Suitcase',
     metafields: { height_cm: 55, width_cm: 40, depth_cm: 20, weight_kg: 2.3, capacity_l: 40, material: 'Polycarbonate shell' },
   },
   {
     title: 'The Everyday Explorer Backpack',
+    type: 'Backpack',
     metafields: { height_cm: 45, width_cm: 30, depth_cm: 18, weight_kg: 0.9, capacity_l: 25, material: 'Ripstop nylon' },
+  },
+  {
+    title: 'The Family Road Trip Organizer Set',
+    type: 'Organizer',
+    metafields: { material: 'Water-repellent polyester' },
   },
 ];
 
@@ -57,7 +64,7 @@ for (const [i, p] of products.entries()) {
   let html = '';
   for (const s of sections) {
     html += await engine.parseAndRender(s.template, {
-      product: { title: p.title, metafields: { basepacker: wrap(p.metafields) } },
+      product: { title: p.title, type: p.type, metafields: { basepacker: wrap(p.metafields) } },
       section: { id: `${s.name}-${i}`, settings: s.settings, blocks: s.blocks },
       localization: { country: { iso_code: 'NL' } },
       request: { design_mode: false },
