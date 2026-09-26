@@ -38,11 +38,31 @@
           "type": "quantity_selector",
           "settings": {}
         },
+        "inventory": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 5,
+            "show_inventory_quantity": false
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
             "show_dynamic_checkout": true,
             "show_gift_card_recipient": true
+          }
+        },
+        "trust_badges": {
+          "type": "icon-with-text",
+          "settings": {
+            "layout": "vertical",
+            "icon_1": "truck",
+            "heading_1": "Ships in 1–2 business days",
+            "icon_2": "return",
+            "heading_2": "14-day returns",
+            "icon_3": "check_mark",
+            "heading_3": "2-year warranty"
           }
         },
         "description": {
@@ -60,9 +80,11 @@
         "vendor",
         "title",
         "price",
+        "inventory",
         "variant_picker",
         "quantity_selector",
         "buy_buttons",
+        "trust_badges",
         "description",
         "share"
       ],
@@ -80,61 +102,6 @@
         "enable_video_looping": false,
         "padding_top": 36,
         "padding_bottom": 12
-      }
-    },
-    "bp_usp_bar_PfcxLR": {
-      "type": "bp-usp-bar",
-      "blocks": {
-        "usp_7JQmdq": {
-          "type": "usp",
-          "settings": {
-            "icon": "truck",
-            "title": "Tracked shipping",
-            "text": "Follow your order from our warehouse to your door.",
-            "link": ""
-          }
-        },
-        "usp_Gx9Gqt": {
-          "type": "usp",
-          "settings": {
-            "icon": "return",
-            "title": "14-day returns",
-            "text": "Changed your mind? Send it back within 14 days.",
-            "link": ""
-          }
-        },
-        "usp_FGrAA7": {
-          "type": "usp",
-          "settings": {
-            "icon": "shield",
-            "title": "2-year warranty",
-            "text": "Built for many trips, and covered if it isn't.",
-            "link": ""
-          }
-        },
-        "usp_pJwUAC": {
-          "type": "usp",
-          "settings": {
-            "icon": "lock",
-            "title": "Secure checkout",
-            "text": "Pay safely with Shopify Checkout.",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "usp_7JQmdq",
-        "usp_Gx9Gqt",
-        "usp_FGrAA7",
-        "usp_pJwUAC"
-      ],
-      "name": "USP bar",
-      "settings": {
-        "background": "sand",
-        "show_heading": false,
-        "heading": "Why travel with Basepacker",
-        "padding_top": 24,
-        "padding_bottom": 24
       }
     },
     "bp_travel_specs_QKDL7D": {
@@ -240,7 +207,7 @@
     "related-products": {
       "type": "related-products",
       "settings": {
-        "heading": "You may also like",
+        "heading": "Complete your trip",
         "heading_size": "h2",
         "products_to_show": 4,
         "columns_desktop": 4,
@@ -334,11 +301,57 @@
         "padding_top": 48,
         "padding_bottom": 48
       }
+    },
+    "problem_solution": {
+      "type": "image-with-text",
+      "blocks": {
+        "caption": {
+          "type": "caption",
+          "settings": {
+            "caption": "Why it helps",
+            "text_style": "caption-with-letter-spacing",
+            "text_size": "medium"
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Everything in its place, trip after trip",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Every pocket has one job, so you pack the same way each time and find what you need without unpacking the rest.</p>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": [
+        "caption",
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "image_behavior": "none",
+        "content_layout": "no-overlap",
+        "desktop_content_position": "middle",
+        "desktop_content_alignment": "left",
+        "mobile_content_alignment": "left",
+        "section_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
     }
   },
   "order": [
     "main",
-    "bp_usp_bar_PfcxLR",
+    "problem_solution",
     "bp_travel_specs_QKDL7D",
     "bp_faq_rFm9fH",
     "disclosures",
