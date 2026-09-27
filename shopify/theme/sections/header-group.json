@@ -14,22 +14,38 @@
     "announcement-bar": {
       "type": "announcement-bar",
       "blocks": {
-        "announcement-bar-0": {
+        "shipping": {
           "type": "announcement",
           "settings": {
-            "text": "Welcome to our store",
+            "text": "Tracked shipping across Europe",
+            "link": "shopify://policies/shipping-policy"
+          }
+        },
+        "returns": {
+          "type": "announcement",
+          "settings": {
+            "text": "14-day returns",
+            "link": "shopify://policies/refund-policy"
+          }
+        },
+        "warranty": {
+          "type": "announcement",
+          "settings": {
+            "text": "2-year warranty",
             "link": ""
           }
         }
       },
       "block_order": [
-        "announcement-bar-0"
+        "shipping",
+        "returns",
+        "warranty"
       ],
       "settings": {
-        "auto_rotate": false,
+        "auto_rotate": true,
         "change_slides_speed": 5,
-        "color_scheme": "scheme-1",
-        "show_line_separator": true,
+        "color_scheme": "scheme-3",
+        "show_line_separator": false,
         "show_social": false,
         "enable_country_selector": false,
         "enable_language_selector": false
