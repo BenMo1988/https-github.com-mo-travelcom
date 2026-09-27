@@ -53,7 +53,8 @@
         "color_scheme": "scheme-3",
         "mobile_content_alignment": "center",
         "stack_images_on_mobile": false,
-        "show_text_below": false
+        "show_text_below": false,
+        "image": "shopify://shop_images/hero-home.png"
       }
     },
     "usp_bar": {
@@ -115,7 +116,8 @@
             "title": "Carry-on only",
             "text": "<p>One bag, no check-in. Organisers and packs that fit under the seat in front of you.</p>",
             "link_label": "Shop carry-on",
-            "link": "shopify://collections/carry-on-only"
+            "link": "shopify://collections/carry-on-only",
+            "image": "shopify://shop_images/carry-on-only.png"
           }
         },
         "need_family": {
@@ -124,7 +126,8 @@
             "title": "Family road trips",
             "text": "<p>Snacks, chargers and spare clothes where you can reach them — not at the bottom of the boot.</p>",
             "link_label": "Shop family",
-            "link": "shopify://collections/family-road-trips"
+            "link": "shopify://collections/family-road-trips",
+            "image": "shopify://shop_images/family-road-trips.png"
           }
         },
         "need_weekend": {
@@ -133,7 +136,8 @@
             "title": "Weekend getaways",
             "text": "<p>Pack on Friday in ten minutes. Compact bags and kits for two or three nights away.</p>",
             "link_label": "Shop weekend",
-            "link": "shopify://collections/weekend-getaways"
+            "link": "shopify://collections/weekend-getaways",
+            "image": "shopify://shop_images/weekend-getaways.png"
           }
         }
       },
@@ -211,7 +215,8 @@
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "image": "shopify://shop_images/packing-cubes.png"
       }
     },
     "problem_solution_2": {
@@ -266,7 +271,8 @@
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-1",
         "padding_top": 36,
-        "padding_bottom": 36
+        "padding_bottom": 36,
+        "image": "shopify://shop_images/flight-comfort.png"
       }
     },
     "featured_collection": {
