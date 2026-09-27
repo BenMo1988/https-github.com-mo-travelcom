@@ -115,7 +115,7 @@
             "title": "Carry-on only",
             "text": "<p>One bag, no check-in. Organisers and packs that fit under the seat in front of you.</p>",
             "link_label": "Shop carry-on",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/carry-on-only-2"
           }
         },
         "need_family": {
@@ -124,7 +124,7 @@
             "title": "Family road trips",
             "text": "<p>Snacks, chargers and spare clothes where you can reach them — not at the bottom of the boot.</p>",
             "link_label": "Shop family",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/family-road-trips"
           }
         },
         "need_weekend": {
@@ -133,7 +133,7 @@
             "title": "Weekend getaways",
             "text": "<p>Pack on Friday in ten minutes. Compact bags and kits for two or three nights away.</p>",
             "link_label": "Shop weekend",
-            "link": "shopify://collections/all"
+            "link": "shopify://collections/weekend-getaways"
           }
         }
       },
