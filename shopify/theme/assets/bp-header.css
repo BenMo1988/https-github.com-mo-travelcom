@@ -1,0 +1,18 @@
+/* Basepacker: transparent header over the homepage hero.
+   Dawn adds .shopify-section-header-sticky when the header is revealed after scrolling;
+   any open <details> (mega menu, drawer, search) also switches the header to solid. */
+
+.section-header:has(.bp-header--transparent) {
+  margin-bottom: calc(-1 * var(--header-height));
+}
+
+.section-header:not(.shopify-section-header-sticky):not(:has(details[open])) .bp-header--transparent {
+  --color-foreground: 250, 248, 244;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0)) no-repeat;
+  background-color: transparent;
+  border-bottom-color: transparent;
+}
+
+.section-header.shopify-section-header-sticky .bp-header--transparent {
+  box-shadow: 0 0.2rem 1.2rem rgba(43, 43, 43, 0.08);
+}

@@ -16,6 +16,16 @@
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{%- liquid
+  assign bp_transparent = false
+  if section.settings.bp_transparent_home and template.name == 'index'
+    assign bp_transparent = true
+  endif
+-%}
+{%- if bp_transparent -%}
+  {{ 'bp-header.css' | asset_url | stylesheet_tag }}
+{%- endif -%}
+
 <style>
   header-drawer {
     justify-self: start;
@@ -146,7 +156,7 @@
   {% if header_tag == 'sticky-header' %}
     data-sticky-type="{{ section.settings.sticky_header_type }}"
   {% endif %}
-  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}"
+  class="header-wrapper color-{{ section.settings.color_scheme }} gradient{% if section.settings.show_line_separator %} header-wrapper--border-bottom{% endif %}{% if bp_transparent %} bp-header--transparent{% endif %}"
 >
   {%- liquid
     assign social_links = false
@@ -570,6 +580,13 @@
       ],
       "default": "dropdown",
       "label": "t:sections.header.settings.menu_type_desktop.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "bp_transparent_home",
+      "label": "Transparent on homepage",
+      "info": "Header sits over the first section on the homepage and turns solid when scrolled or when a menu opens.",
+      "default": true
     },
     {
       "type": "select",
