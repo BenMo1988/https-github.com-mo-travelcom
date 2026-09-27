@@ -115,7 +115,7 @@
             "title": "Carry-on only",
             "text": "<p>One bag, no check-in. Organisers and packs that fit under the seat in front of you.</p>",
             "link_label": "Shop carry-on",
-            "link": "shopify://collections/carry-on-only-2"
+            "link": "shopify://collections/carry-on-only"
           }
         },
         "need_family": {
