@@ -63,7 +63,7 @@
           "settings": {
             "heading": "How do I reach you?",
             "icon": "chat_bubble",
-            "row_content": "<p>Use our <a href=\"/pages/contact\">contact form</a> or email [fill in]. We reply within [fill in] business days.</p>"
+            "row_content": "<p>Use our <a href=\"/pages/contact\">contact form</a> or email <a href=\"mailto:info@basepacker.com\">info@basepacker.com</a>. We reply within [fill in] business days.</p>"
           }
         }
       },
