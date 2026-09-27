@@ -1,0 +1,88 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    },
+    "faq": {
+      "type": "collapsible-content",
+      "blocks": {
+        "order": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I place an order?",
+            "icon": "box",
+            "row_content": "<p>Add what you need to your cart and check out. You can pay with the methods shown at checkout. You'll get an order confirmation by email straight away.</p>"
+          }
+        },
+        "ship_time": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "When will my order ship?",
+            "icon": "truck",
+            "row_content": "<p>We ship within [fill in] business days. Every order is tracked, and you'll get the tracking link by email as soon as it leaves our warehouse.</p>"
+          }
+        },
+        "ship_cost": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How much does shipping cost?",
+            "icon": "price_tag",
+            "row_content": "<p>[fill in]. You'll see the exact cost at checkout before you pay. Our <a href=\"/policies/shipping-policy\">shipping policy</a> lists delivery times per region.</p>"
+          }
+        },
+        "returns": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Can I return my order?",
+            "icon": "return",
+            "row_content": "<p>Yes. You have 14 days from delivery to change your mind. Our <a href=\"/policies/refund-policy\">refund policy</a> explains how to send it back.</p>"
+          }
+        },
+        "warranty": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "What does the 2-year warranty cover?",
+            "icon": "check_mark",
+            "row_content": "<p>Every product comes with the 2-year legal guarantee that applies in the EU. If something stops working as it should because of a defect, we repair or replace it.</p>"
+          }
+        },
+        "cabin": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Will it fit as cabin baggage?",
+            "icon": "plane",
+            "row_content": "<p>Each bag and suitcase page has an airline cabin check that compares its size with the limits of major European airlines. Airlines change their rules, so confirm with yours before you fly.</p>"
+          }
+        },
+        "contact": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "How do I reach you?",
+            "icon": "chat_bubble",
+            "row_content": "<p>Use our <a href=\"/pages/contact\">contact form</a> or email [fill in]. We reply within [fill in] business days.</p>"
+          }
+        }
+      },
+      "block_order": ["order", "ship_time", "ship_cost", "returns", "warranty", "cabin", "contact"],
+      "settings": {
+        "caption": "",
+        "heading": "Questions before you pack?",
+        "heading_size": "h1",
+        "heading_alignment": "left",
+        "layout": "none",
+        "container_color_scheme": "scheme-1",
+        "color_scheme": "scheme-1",
+        "open_first_collapsible_row": false,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 24,
+        "padding_bottom": 56
+      }
+    }
+  },
+  "order": ["main", "faq"]
+}
