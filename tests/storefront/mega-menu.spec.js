@@ -39,6 +39,18 @@ test('a tile without a collection image shows the sand placeholder, not a broken
   await expect(tile.locator('.bp-mega__tile-caption')).toContainText('Carry-on only');
 });
 
+test('tile images keep a 3:4 portrait shape', async ({ page }) => {
+  await openPage(page, '/collections/all');
+  await openShop(page);
+  const imgs = page.locator('a.bp-mega__tile img.bp-mega__tile-image');
+  const count = await imgs.count();
+  expect(count).toBeGreaterThan(0);
+  for (let i = 0; i < count; i++) {
+    const box = await imgs.nth(i).boundingBox();
+    expect(Math.abs(box.height / box.width - 4 / 3)).toBeLessThan(0.02);
+  }
+});
+
 test('opening the menu over the transparent homepage header makes it solid', async ({ page }) => {
   await openPage(page, '/');
   expect(await fg(page.locator('.header-wrapper'))).toBe('250,248,244');
