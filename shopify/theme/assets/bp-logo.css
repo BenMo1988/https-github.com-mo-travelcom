@@ -1,0 +1,52 @@
+/* Basepacker logo: label mark + wordmark. Ink is the label and the word; paper is the eyelet and horizon. */
+
+.bp-logo {
+  --bp-logo-ink: #1d3b53;
+  --bp-logo-paper: #faf8f4;
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.bp-logo__mark {
+  flex-shrink: 0;
+  width: auto;
+  height: 3.4rem;
+}
+
+.bp-logo__tag {
+  fill: var(--bp-logo-ink);
+}
+
+.bp-logo__eyelet,
+.bp-logo__horizon {
+  fill: var(--bp-logo-paper);
+}
+
+.bp-logo__sun {
+  fill: #c97b4a;
+}
+
+.bp-logo__word {
+  color: var(--bp-logo-ink);
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  font-size: 2.6rem;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+@media screen and (max-width: 749px) {
+  .bp-logo {
+    gap: 0.8rem;
+  }
+
+  .bp-logo__mark {
+    height: 2.8rem;
+  }
+
+  .bp-logo__word {
+    font-size: 2.2rem;
+  }
+}

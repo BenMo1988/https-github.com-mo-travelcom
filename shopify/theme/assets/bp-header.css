@@ -21,3 +21,9 @@ body:has(.bp-header--transparent) main > .shopify-section:first-child .banner__c
 .section-header.shopify-section-header-sticky .bp-header--transparent {
   box-shadow: 0 0.2rem 1.2rem rgba(43, 43, 43, 0.08);
 }
+
+/* Reversed logo over the hero: off-white label and word, blue eyelet and horizon. */
+.section-header:not(.shopify-section-header-sticky):not(:has(details[open])) .bp-header--transparent .bp-logo {
+  --bp-logo-ink: #faf8f4;
+  --bp-logo-paper: #1d3b53;
+}

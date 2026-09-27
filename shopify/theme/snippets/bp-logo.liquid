@@ -1,0 +1,13 @@
+{%- comment -%}
+  Basepacker logo: a luggage label with the sun rising over the horizon, next to the wordmark.
+  Colors come from bp-logo.css; bp-header.css reverses them over the homepage hero.
+{%- endcomment -%}
+<span class="bp-logo">
+  <svg class="bp-logo__mark" viewBox="0 0 40 56" width="40" height="56" aria-hidden="true" focusable="false">
+    <path class="bp-logo__tag" d="M11 0H29L40 11V49Q40 56 33 56H7Q0 56 0 49V11Z"/>
+    <circle class="bp-logo__eyelet" cx="20" cy="10" r="3"/>
+    <path class="bp-logo__sun" d="M8 36A12 12 0 0 1 32 36Z"/>
+    <rect class="bp-logo__horizon" x="0" y="36" width="40" height="3.2"/>
+  </svg>
+  <span class="bp-logo__word">{{ shop.name }}</span>
+</span>

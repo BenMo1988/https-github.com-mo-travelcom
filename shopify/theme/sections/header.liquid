@@ -12,6 +12,8 @@
   <link rel="stylesheet" href="{{ 'component-price.css' | asset_url }}" media="print" onload="this.media='all'">
 {%- endif -%}
 
+{{ 'bp-logo.css' | asset_url | stylesheet_tag }}
+
 {%- if section.settings.menu_type_desktop == 'mega' -%}
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
   {{ 'bp-mega-menu.css' | asset_url | stylesheet_tag }}
@@ -216,7 +218,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- render 'bp-logo' -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
@@ -259,7 +261,7 @@
             }}
           </div>
         {%- else -%}
-          <span class="h2">{{ shop.name }}</span>
+          {%- render 'bp-logo' -%}
         {%- endif -%}
       </a>
       {%- if request.page_type == 'index' -%}
