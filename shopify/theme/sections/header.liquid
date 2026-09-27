@@ -14,6 +14,7 @@
 
 {%- if section.settings.menu_type_desktop == 'mega' -%}
   <link rel="stylesheet" href="{{ 'component-mega-menu.css' | asset_url }}" media="print" onload="this.media='all'">
+  {{ 'bp-mega-menu.css' | asset_url | stylesheet_tag }}
 {%- endif -%}
 
 {%- liquid
@@ -587,6 +588,13 @@
       "label": "Transparent on homepage",
       "info": "Header sits over the first section on the homepage and turns solid when scrolled or when a menu opens.",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "bp_mega_tiles_column",
+      "label": "Mega menu image tiles column",
+      "info": "Title of the second-level menu item whose links show as image tiles, e.g. By trip. Leave empty for Dawn's standard mega menu.",
+      "default": "By trip"
     },
     {
       "type": "select",

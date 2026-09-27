@@ -1,5 +1,8 @@
 {% comment %}
   Renders a megamenu for the header.
+  Basepacker: a top-level item whose children include the column named in
+  section.settings.bp_mega_tiles_column gets text columns plus image tiles
+  (one tile per link in that column). Other items keep Dawn's default markup.
 
   Usage:
   {% render 'header-mega-menu' %}
@@ -10,6 +13,14 @@
     {%- for link in section.settings.menu.links -%}
       <li>
         {%- if link.links != blank -%}
+          {%- liquid
+            assign tiles_link = nil
+            for childlink in link.links
+              if childlink.title == section.settings.bp_mega_tiles_column
+                assign tiles_link = childlink
+              endif
+            endfor
+          -%}
           <header-menu>
             <details id="Details-HeaderMenu-{{ forloop.index }}" class="mega-menu">
               <summary
@@ -30,43 +41,105 @@
                 class="mega-menu__content color-{{ section.settings.menu_color_scheme }} gradient motion-reduce global-settings-popup"
                 tabindex="-1"
               >
-                <ul
-                  class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
-                  role="list"
-                >
-                  {%- for childlink in link.links -%}
-                    <li>
-                      <a
-                        id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
-                        href="{{ childlink.url }}"
-                        class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
-                        {% if childlink.current %}
-                          aria-current="page"
-                        {% endif %}
-                      >
-                        {{ childlink.title | escape }}
+                {%- if tiles_link and tiles_link.links != blank -%}
+                  <div class="bp-mega page-width">
+                    <div class="bp-mega__columns">
+                      {%- for childlink in link.links -%}
+                        <div class="bp-mega__column">
+                          <p class="bp-mega__heading caption-with-letter-spacing">{{ childlink.title | escape }}</p>
+                          <ul class="list-unstyled" role="list">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        </div>
+                      {%- endfor -%}
+                      <a href="{{ link.url }}" class="bp-mega__all link">
+                        Shop all products <span aria-hidden="true">→</span>
                       </a>
-                      {%- if childlink.links != blank -%}
-                        <ul class="list-unstyled" role="list">
-                          {%- for grandchildlink in childlink.links -%}
-                            <li>
-                              <a
-                                id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
-                                href="{{ grandchildlink.url }}"
-                                class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
-                                {% if grandchildlink.current %}
-                                  aria-current="page"
-                                {% endif %}
-                              >
-                                {{ grandchildlink.title | escape }}
-                              </a>
-                            </li>
-                          {%- endfor -%}
-                        </ul>
-                      {%- endif -%}
-                    </li>
-                  {%- endfor -%}
-                </ul>
+                    </div>
+                    <ul class="bp-mega__tiles" role="list">
+                      {%- for tile in tiles_link.links -%}
+                        {%- liquid
+                          assign tile_image = nil
+                          if tile.type == 'collection_link'
+                            assign tile_image = tile.object.featured_image
+                          endif
+                        -%}
+                        <li>
+                          <a href="{{ tile.url }}" class="bp-mega__tile">
+                            {%- if tile_image -%}
+                              {{
+                                tile_image
+                                | image_url: width: 600
+                                | image_tag:
+                                  loading: 'lazy',
+                                  class: 'bp-mega__tile-image',
+                                  widths: '300, 450, 600',
+                                  sizes: '(min-width: 990px) 18vw, 100vw',
+                                  alt: ''
+                              }}
+                            {%- else -%}
+                              <span class="bp-mega__tile-placeholder" aria-hidden="true">{{ tile.title | escape }}</span>
+                            {%- endif -%}
+                            <span class="bp-mega__tile-caption">
+                              {{- tile.title | escape }} <span aria-hidden="true">→</span>
+                            </span>
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  </div>
+                {%- else -%}
+                  <ul
+                    class="mega-menu__list page-width{% if link.levels == 1 %} mega-menu__list--condensed{% endif %}"
+                    role="list"
+                  >
+                    {%- for childlink in link.links -%}
+                      <li>
+                        <a
+                          id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}"
+                          href="{{ childlink.url }}"
+                          class="mega-menu__link mega-menu__link--level-2 link{% if childlink.current %} mega-menu__link--active{% endif %}"
+                          {% if childlink.current %}
+                            aria-current="page"
+                          {% endif %}
+                        >
+                          {{ childlink.title | escape }}
+                        </a>
+                        {%- if childlink.links != blank -%}
+                          <ul class="list-unstyled" role="list">
+                            {%- for grandchildlink in childlink.links -%}
+                              <li>
+                                <a
+                                  id="HeaderMenu-{{ link.handle }}-{{ childlink.handle }}-{{ grandchildlink.handle }}"
+                                  href="{{ grandchildlink.url }}"
+                                  class="mega-menu__link link{% if grandchildlink.current %} mega-menu__link--active{% endif %}"
+                                  {% if grandchildlink.current %}
+                                    aria-current="page"
+                                  {% endif %}
+                                >
+                                  {{ grandchildlink.title | escape }}
+                                </a>
+                              </li>
+                            {%- endfor -%}
+                          </ul>
+                        {%- endif -%}
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                {%- endif -%}
               </div>
             </details>
           </header-menu>

@@ -1,0 +1,78 @@
+/* Basepacker mega menu: text columns left, trip tiles right. */
+
+.bp-mega {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  gap: 4rem;
+  padding-top: 3.2rem;
+  padding-bottom: 3.2rem;
+}
+
+.bp-mega__columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2.4rem 3.2rem;
+  align-content: start;
+}
+
+.bp-mega__heading {
+  margin: 0 0 1.2rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.bp-mega__columns .mega-menu__link {
+  padding: 0.6rem 0;
+}
+
+.bp-mega__all {
+  grid-column: 1 / -1;
+  font-size: 1.4rem;
+  text-underline-offset: 0.3rem;
+}
+
+.bp-mega__tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.6rem;
+}
+
+.bp-mega__tile {
+  display: block;
+  color: rgb(var(--color-foreground));
+  text-decoration: none;
+}
+
+.bp-mega__tile-image,
+.bp-mega__tile-placeholder {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+
+.bp-mega__tile-placeholder {
+  display: flex;
+  align-items: flex-end;
+  padding: 1.6rem;
+  background-color: #e8dcc8;
+  color: #2b2b2b;
+  font-family: var(--font-heading-family);
+  font-size: 2rem;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
+.bp-mega__tile-caption {
+  display: block;
+  margin-top: 0.8rem;
+  font-size: 1.4rem;
+}
+
+.bp-mega__tile:hover .bp-mega__tile-caption,
+.bp-mega__tile:focus-visible .bp-mega__tile-caption {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
